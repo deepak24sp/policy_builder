@@ -1,1486 +1,1478 @@
 [
-    {
-		"name": "customers/C022n8w1u/policySchemas/chrome.devices.AutoUpdateSettings",
-		"policyDescription": "Auto-update settings.",
-		"definition": {
-			"messageType": [
-				{
-					"name": "AutoUpdateSettings",
-					"field": [
-						{
-							"name": "updateDisabled",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_BOOL"
-						},
-						{
-							"name": "rebootAfterUpdate",
-							"number": 2,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_BOOL"
-						},
-						{
-							"name": "autoUpdateAllowedConnectionType",
-							"number": 3,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "AutoUpdateConnectionTypeEnum"
-						},
-						{
-							"name": "deviceRollbackToTargetVersion",
-							"number": 5,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "RollbackToTargetVersionEnum"
-						},
-						{
-							"name": "autoUpdateRolloutPlan",
-							"number": 6,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "AutoUpdateRolloutPlan"
-						},
-						{
-							"name": "autoUpdateTimeRestrictions",
-							"number": 7,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "AutoUpdateTimeRestrictions"
-						},
-						{
-							"name": "autoUpdateTargetVersionLts",
-							"number": 8,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "AutoUpdateTargetVersionLts"
-						},
-						{
-							"name": "deviceMinimumVersionAueMessage",
-							"number": 9,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_STRING"
-						},
-						{
-							"name": "deviceMinimumVersion",
-							"number": 10,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "DeviceMinimumVersion"
-						},
-						{
-							"name": "autoUpdateHttpDownloadsEnabled",
-							"number": 11,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_BOOL"
-						},
-						{
-							"name": "releaseChannelWithLts",
-							"number": 12,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "ReleaseChannelWithLtsEnum"
-						},
-						{
-							"name": "deviceAutoUpdatePeerToPeerEnabled",
-							"number": 13,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_BOOL"
-						}
-					]
-				},
-				{
-					"name": "AutoUpdateRolloutPlan",
-					"field": [
-						{
-							"name": "plan",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "RolloutPlan"
-						},
-						{
-							"name": "stages",
-							"number": 2,
-							"label": "LABEL_REPEATED",
-							"type": "TYPE_MESSAGE",
-							"typeName": "Stage"
-						},
-						{
-							"name": "scatter",
-							"number": 3,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "ScatterFactor"
-						}
-					]
-				},
-				{
-					"name": "Stage",
-					"field": [
-						{
-							"name": "days",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT32"
-						},
-						{
-							"name": "percentage",
-							"number": 2,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT32"
-						}
-					]
-				},
-				{
-					"name": "AutoUpdateTimeRestrictions",
-					"field": [
-						{
-							"name": "timeRestriction",
-							"number": 1,
-							"label": "LABEL_REPEATED",
-							"type": "TYPE_MESSAGE",
-							"typeName": "TimeRestriction"
-						}
-					]
-				},
-				{
-					"name": "TimeRestriction",
-					"field": [
-						{
-							"name": "start",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "DayAndTime"
-						},
-						{
-							"name": "end",
-							"number": 2,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "DayAndTime"
-						}
-					]
-				},
-				{
-					"name": "DayAndTime",
-					"field": [
-						{
-							"name": "dayOfWeek",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "DayOfWeek"
-						},
-						{
-							"name": "hours",
-							"number": 2,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT32"
-						},
-						{
-							"name": "minutes",
-							"number": 3,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT32"
-						}
-					]
-				},
-				{
-					"name": "AutoUpdateTargetVersionLts",
-					"field": [
-						{
-							"name": "selectedVersion",
-							"number": 5,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_MESSAGE",
-							"typeName": "SelectedVersion"
-						}
-					]
-				},
-				{
-					"name": "SelectedVersion",
-					"field": [
-						{
-							"name": "displayName",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_STRING"
-						}
-					]
-				},
-				{
-					"name": "DeviceMinimumVersion",
-					"field": [
-						{
-							"name": "chromeosVersion",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_STRING"
-						},
-						{
-							"name": "aueWarningPeriodDays",
-							"number": 2,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT64"
-						},
-						{
-							"name": "warningPeriodDays",
-							"number": 3,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT64"
-						}
-					]
-				}
-			],
-			"enumType": [
-				{
-					"name": "AutoUpdateConnectionTypeEnum",
-					"value": [
-						{
-							"name": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_WIFI_AND_ETHERNET",
-							"number": 1
-						},
-						{
-							"name": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_ALL_CONNECTIONS",
-							"number": 2
-						}
-					]
-				},
-				{
-					"name": "RollbackToTargetVersionEnum",
-					"value": [
-						{
-							"name": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_DISABLED",
-							"number": 1
-						},
-						{
-							"name": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_AND_RESTORE_IF_POSSIBLE",
-							"number": 3
-						}
-					]
-				},
-				{
-					"name": "RolloutPlan",
-					"value": [
-						{ "name": "DEFAULT_UPDATES", "number": 1 },
-						{ "name": "SCATTER_UPDATES", "number": 2 },
-						{ "name": "SCHEDULE_UPDATES", "number": 3 }
-					]
-				},
-				{
-					"name": "ScatterFactor",
-					"value": [
-						{ "name": "NO_SCATTER_FACTOR", "number": 1 },
-						{ "name": "ONE_DAY", "number": 2 },
-						{ "name": "TWO_DAYS", "number": 3 },
-						{ "name": "THREE_DAYS", "number": 4 },
-						{ "name": "FOUR_DAYS", "number": 5 },
-						{ "name": "FIVE_DAYS", "number": 6 },
-						{ "name": "SIX_DAYS", "number": 7 },
-						{ "name": "SEVEN_DAYS", "number": 8 },
-						{ "name": "EIGHT_DAYS", "number": 9 },
-						{ "name": "NINE_DAYS", "number": 10 },
-						{ "name": "TEN_DAYS", "number": 11 },
-						{ "name": "ELEVEN_DAYS", "number": 12 },
-						{ "name": "TWELVE_DAYS", "number": 13 },
-						{ "name": "THIRTEEN_DAYS", "number": 14 },
-						{ "name": "FOURTEEN_DAYS", "number": 15 }
-					]
-				},
-				{
-					"name": "DayOfWeek",
-					"value": [
-						{ "name": "MONDAY", "number": 1 },
-						{ "name": "TUESDAY", "number": 2 },
-						{ "name": "WEDNESDAY", "number": 3 },
-						{ "name": "THURSDAY", "number": 4 },
-						{ "name": "FRIDAY", "number": 5 },
-						{ "name": "SATURDAY", "number": 6 },
-						{ "name": "SUNDAY", "number": 7 }
-					]
-				},
-				{
-					"name": "ReleaseChannelWithLtsEnum",
-					"value": [
-						{
-							"name": "RELEASE_CHANNEL_WITH_LTS_ENUM_ALLOW_USER_CHOICE",
-							"number": 1
-						},
-						{
-							"name": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
-							"number": 2
-						},
-						{
-							"name": "RELEASE_CHANNEL_WITH_LTS_ENUM_BETA_CHANNEL",
-							"number": 3
-						},
-						{
-							"name": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTS_CHANNEL",
-							"number": 4
-						},
-						{
-							"name": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTC_CHANNEL",
-							"number": 5
-						},
-						{
-							"name": "RELEASE_CHANNEL_WITH_LTS_ENUM_DEV_CHANNEL",
-							"number": 6
-						}
-					]
-				}
-			]
-		},
-		"fieldDescriptions": [
-			{
-				"field": "updateDisabled",
-				"description": "Allow devices to automatically update OS version. Controls whether managed ChromeOS devices install updates.",
-				"knownValueDescriptions": [
-					{ "value": "true", "description": "Block updates." },
-					{ "value": "false", "description": "Allow updates." }
-				],
-				"defaultValue": false,
-				"name": "Allow devices to automatically update OS version.",
-				"fieldDescription": "Controls whether managed ChromeOS devices install updates.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "rebootAfterUpdate",
-				"description": "Auto reboot after updates. Controls whether a managed ChromeOS device reboots after it is updated.",
-				"knownValueDescriptions": [
-					{ "value": "true", "description": "Allow auto-reboots." },
-					{
-						"value": "false",
-						"description": "Disallow auto-reboots."
-					}
-				],
-				
-				"defaultValue": false,
-				"name": "Auto reboot after updates.",
-				"fieldDescription": "Controls whether a managed ChromeOS device reboots after it is updated.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "autoUpdateAllowedConnectionType",
-				"description": "Updates over cellular. Controls whether a managed ChromeOS device updates over Wi-Fi and Ethernet only or using any connection type, including cellular.",
-				"knownValueDescriptions": [
-					{
-						"value": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_WIFI_AND_ETHERNET",
-						"description": "Allow automatic updates over Wi-Fi and Ethernet only."
-					},
-					{
-						"value": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_ALL_CONNECTIONS",
-						"description": "Allow automatic updates on all connections, including cellular."
-					}
-				],
-				"fieldDependencies": [],
-				"defaultValue": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_WIFI_AND_ETHERNET",
-				"name": "Updates over cellular.",
-				"fieldDescription": "Controls whether a managed ChromeOS device updates over Wi-Fi and Ethernet only or using any connection type, including cellular.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "deviceRollbackToTargetVersion",
-				"description": "Roll back to target version. To use a previous version, devices will need to be restarted. Devices will be wiped and all local data will be lost. Learn more about rolling back devices here: https://support.google.com/chrome/a?p=rollback.",
-				"knownValueDescriptions": [
-					{
-						"value": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_DISABLED",
-						"description": "Do not roll back OS."
-					},
-					{
-						"value": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_AND_RESTORE_IF_POSSIBLE",
-						"description": "Roll back OS."
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"defaultValue": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_DISABLED",
-				"name": "Roll back to target version.",
-				"fieldDescription": "To use a previous version, devices will need to be restarted. Devices will be wiped and all local data will be lost. Learn more about rolling back devices here: https://support.google.com/chrome/a?p=rollback.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "autoUpdateRolloutPlan",
-				"description": "Allows the admin to specify a timed rollout plan for automatic updates.",
-				"nestedFieldDescriptions": [
-					{
-						"field": "plan",
-						"description": "Update rollout plan.",
-						"knownValueDescriptions": [
-							{
-								"value": "DEFAULT_UPDATES",
-								"description": "Default (devices should update as soon as a new version is available)."
-							},
-							{
-								"value": "SCHEDULE_UPDATES",
-								"description": "Roll out updates over a specific schedule."
-							},
-							{
-								"value": "SCATTER_UPDATES",
-								"description": "Scatter updates."
-							}
-						],
-						"defaultValue":"DEFAULT_UPDATES",
-						"name": "Update rollout plan.",
-						"fieldConstraints": {}
-					},
-					{
-						"field": "stages",
-						"description": "Rollout stages.",
-						"nestedFieldDescriptions": [
-							{
-								"field": "days",
-								"description": "Days.",
-								"name": "Days.",
-								"fieldConstraints": {}
-							},
-							{
-								"field": "percentage",
-								"description": "Percentage.",
-								"name": "Percentage.",
-								"fieldConstraints": {}
-							}
-						],
-						"name": "Rollout stages.",
-						"fieldDependencies":[
-							{
-							"sourceField": "plan",
-							"sourceFieldValue": "SCHEDULE_UPDATES"
-							}
-					],
-						"fieldConstraints": {}
-					},
-					{
-						"field": "scatter",
-						"description": "Scatter Factor.",
-						"knownValueDescriptions": [
-							{
-								"value": "NO_SCATTER_FACTOR",
-								"description": "No scatter factor."
-							},
-							{
-								"value": "ONE_DAY",
-								"description": "Scatter updates over one day."
-							},
-							{
-								"value": "TWO_DAYS",
-								"description": "Scatter updates over two days."
-							},
-							{
-								"value": "THREE_DAYS",
-								"description": "Scatter updates over three days."
-							},
-							{
-								"value": "FOUR_DAYS",
-								"description": "Scatter updates over four days."
-							},
-							{
-								"value": "FIVE_DAYS",
-								"description": "Scatter updates over five days."
-							},
-							{
-								"value": "SIX_DAYS",
-								"description": "Scatter updates over six days."
-							},
-							{
-								"value": "SEVEN_DAYS",
-								"description": "Scatter updates over seven days."
-							},
-							{
-								"value": "EIGHT_DAYS",
-								"description": "Scatter updates over eight days."
-							},
-							{
-								"value": "NINE_DAYS",
-								"description": "Scatter updates over nine days."
-							},
-							{
-								"value": "TEN_DAYS",
-								"description": "Scatter updates over ten days."
-							},
-							{
-								"value": "ELEVEN_DAYS",
-								"description": "Scatter updates over eleven days."
-							},
-							{
-								"value": "TWELVE_DAYS",
-								"description": "Scatter updates over twelve days."
-							},
-							{
-								"value": "THIRTEEN_DAYS",
-								"description": "Scatter updates over thirteen days."
-							},
-							{
-								"value": "FOURTEEN_DAYS",
-								"description": "Scatter updates over fourteen days."
-							}
-						],
-						"name": "Scatter Factor.",
-						"fieldConstraints": {}
-					}
-				],
-				"fieldDependencies": [
-					
-				],
-				"name": "Allows the admin to specify a timed rollout plan for automatic updates.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "autoUpdateTimeRestrictions",
-				"description": "Allows the admin to specify time restrictions for when automatic updates take place.",
-				"nestedFieldDescriptions": [
-					{
-						"field": "timeRestriction",
-						"description": "Update time restrictions.",
-						"nestedFieldDescriptions": [
-							{
-								"field": "start",
-								"description": "Start.",
-								"nestedFieldDescriptions": [
-									{
-										"field": "dayOfWeek",
-										"description": "Day of week.",
-										"knownValueDescriptions": [
-											{
-												"value": "MONDAY",
-												"description": "Monday."
-											},
-											{
-												"value": "TUESDAY",
-												"description": "Tuesday."
-											},
-											{
-												"value": "WEDNESDAY",
-												"description": "Wednesday."
-											},
-											{
-												"value": "THURSDAY",
-												"description": "Thursday."
-											},
-											{
-												"value": "FRIDAY",
-												"description": "Friday."
-											},
-											{
-												"value": "SATURDAY",
-												"description": "Saturday."
-											},
-											{
-												"value": "SUNDAY",
-												"description": "Sunday."
-											}
-										],
-										"name": "Day of week.",
-										"fieldConstraints": {}
-									},
-									{
-										"field": "hours",
-										"description": "Hours.",
-										"name": "Hours.",
-										"fieldConstraints": {}
-									},
-									{
-										"field": "minutes",
-										"description": "Minutes.",
-										"knownValueDescriptions": [
-											{
-												"value": "0",
-												"description": "0."
-											},
-											{
-												"value": "15",
-												"description": "15."
-											},
-											{
-												"value": "30",
-												"description": "30."
-											},
-											{
-												"value": "45",
-												"description": "45."
-											}
-										],
-										"name": "Minutes.",
-										"fieldConstraints": {}
-									}
-								],
-								"name": "Start.",
-								"fieldConstraints": {}
-							},
-							{
-								"field": "end",
-								"description": "End.",
-								"name": "End.",
-								"fieldConstraints": {}
-							}
-						],
-						"name": "Update time restrictions.",
-						"fieldConstraints": {}
-					}
-				],
-				"fieldDependencies": [],
-				"name": "Allows the admin to specify time restrictions for when automatic updates take place.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "autoUpdateTargetVersionLts",
-				"description": "Specifies the prefix of a target version Google ChromeOS should update to. If the device is running a version that's before the specified prefix, it will update to the latest version with the given prefix. If the device is already on a later version, effects depend on the value of DeviceRollbackToTargetVersion.",
-				"nestedFieldDescriptions": [
-					{
-						"field": "selectedVersion",
-						"description": "Selected auto update version.",
-						"nestedFieldDescriptions": [
-							{
-								"field": "displayName",
-								"description": "Version name.",
-								"knownValueDescriptions": [
-									{
-										"value": "No restriction",
-										"description": "Use latest available version."
-									},
-									{
-										"value": "127.*",
-										"description": "127.*."
-									},
-									{
-										"value": "128.*",
-										"description": "128.*."
-									},
-									{
-										"value": "129.*",
-										"description": "129.*."
-									},
-									{
-										"value": "130.*",
-										"description": "130.*."
-									},
-									{
-										"value": "126.* (long-term support)",
-										"description": "126.* (long-term support).",
-										"fieldDependencies": [
-											{
-												"sourceField": "releaseChannelWithLts",
-												"sourceFieldValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTS_CHANNEL"
-											},
-											{
-												"sourceField": "releaseChannelWithLts",
-												"sourceFieldValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTC_CHANNEL"
-											}
-										]
-									}
-								],
-								"name": "Version name.",
-								"fieldConstraints": {}
-							}
-						],
-						"name": "Selected auto update version.",
-						"fieldConstraints": {}
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"name": "Specifies the prefix of a target version Google ChromeOS should update to. If the device is running a version that's before the specified prefix, it will update to the latest version with the given prefix. If the device is already on a later version, effects depend on the value of DeviceRollbackToTargetVersion.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "deviceMinimumVersionAueMessage",
-				"description": "Final automatic update alert message. When a device reaches its last automatic update(https://support.google.com/chrome/a/answer/6220366)automatic , an alert is sent to the user. This text overrides the default message that will be shown on the device.",
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "true"
-					},
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"name": "Final automatic update alert message.",
-				"fieldDescription": "When a device reaches its last automatic update(https://support.google.com/chrome/a/answer/6220366)automatic , an alert is sent to the user. This text overrides the default message that will be shown on the device.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "deviceMinimumVersion",
-				"description": "Sets the minimum version of ChromeOS a device must be updated to.",
-				"nestedFieldDescriptions": [
-					{
-						"field": "chromeosVersion",
-						"description": "Chrome version.",
-						"knownValueDescriptions": [
-							{
-								"value": "",
-								"description": "Do not enforce updates."
-							},
-							{ "value": "13421", "description": "86.*." },
-							{ "value": "13505", "description": "87.*." },
-							{ "value": "13597", "description": "88.*." },
-							{ "value": "13729", "description": "89.*." },
-							{ "value": "13816", "description": "90.*." },
-							{ "value": "13904", "description": "91.*." },
-							{ "value": "13982", "description": "92.*." },
-							{ "value": "14092", "description": "93.*." },
-							{ "value": "14150", "description": "94.*." },
-							{ "value": "14268", "description": "96.*." },
-							{ "value": "14324", "description": "97.*." },
-							{ "value": "14388", "description": "98.*." },
-							{ "value": "14469", "description": "99.*." },
-							{ "value": "14526", "description": "100.*." },
-							{ "value": "14588", "description": "101.*." },
-							{ "value": "14695", "description": "102.*." },
-							{ "value": "14816", "description": "103.*." },
-							{ "value": "14909", "description": "104.*." },
-							{ "value": "14989", "description": "105.*." },
-							{ "value": "15054", "description": "106.*." },
-							{ "value": "15117", "description": "107.*." },
-							{ "value": "15183", "description": "108.*." },
-							{ "value": "15236", "description": "109.*." },
-							{ "value": "15278", "description": "110.*." },
-							{ "value": "15329", "description": "111.*." },
-							{ "value": "15359", "description": "112.*." },
-							{ "value": "15393", "description": "113.*." },
-							{ "value": "15437", "description": "114.*." },
-							{ "value": "15474", "description": "115.*." },
-							{ "value": "15509", "description": "116.*." },
-							{ "value": "15572", "description": "117.*." },
-							{ "value": "15604", "description": "118.*." },
-							{ "value": "15633", "description": "119.*." },
-							{ "value": "15662", "description": "120.*." },
-							{ "value": "15699", "description": "121.*." },
-							{ "value": "15753", "description": "122.*." },
-							{ "value": "15786", "description": "123.*." },
-							{ "value": "15823", "description": "124.*." },
-							{ "value": "15853", "description": "125.*." },
-							{ "value": "15886", "description": "126.*." },
-							{ "value": "15917", "description": "127.*." },
-							{ "value": "15964", "description": "128.*." },
-							{ "value": "16002", "description": "129.*." }
-						],
-						"name": "Chrome version.",
-						"fieldConstraints": {}
-					},
-					{
-						"field": "aueWarningPeriodDays",
-						"description": "Extended period to update for Auto Update Expiration devices (AUE).",
-						"knownValueDescriptions": [
-							{ "value": "0", "description": "No warning." },
-							{ "value": "7", "description": "One week." },
-							{ "value": "14", "description": "Two weeks." },
-							{ "value": "21", "description": "Three weeks." },
-							{ "value": "28", "description": "Four weeks." },
-							{ "value": "35", "description": "Five weeks." },
-							{ "value": "42", "description": "Six weeks." },
-							{ "value": "49", "description": "Seven weeks." },
-							{ "value": "56", "description": "Eight weeks." },
-							{ "value": "63", "description": "Nine weeks." },
-							{ "value": "70", "description": "Ten weeks." },
-							{ "value": "77", "description": "Eleven weeks." },
-							{ "value": "84", "description": "Twelve weeks." }
-						],
-						"name": "Extended period to update for Auto Update Expiration devices (AUE).",
-						"fieldConstraints": {}
-					},
-					{
-						"field": "warningPeriodDays",
-						"description": "Period to block devices and user sessions after if the device is not update to chrome_version.",
-						"knownValueDescriptions": [
-							{ "value": "0", "description": "No warning." },
-							{ "value": "7", "description": "One week." },
-							{ "value": "14", "description": "Two weeks." },
-							{ "value": "21", "description": "Three weeks." },
-							{ "value": "28", "description": "Four weeks." },
-							{ "value": "35", "description": "Five weeks." },
-							{ "value": "42", "description": "Six weeks." }
-						],
-						"name": "Period to block devices and user sessions after if the device is not update to chrome_version.",
-						"fieldConstraints": {}
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "true"
-					},
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"name": "Sets the minimum version of ChromeOS a device must be updated to.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "autoUpdateHttpDownloadsEnabled",
-				"description": "Update downloads. Controls whether update downloads use HTTP or HTTPS.",
-				"knownValueDescriptions": [
-					{
-						"value": "true",
-						"description": "Use HTTP for update downloads."
-					},
-					{
-						"value": "false",
-						"description": "Use HTTPS for update downloads."
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "true"
-					},
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"defaultValue": false,
-				"name": "Update downloads.",
-				"fieldDescription": "Controls whether update downloads use HTTP or HTTPS.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "releaseChannelWithLts",
-				"description": "Release channel. Changing the release channel can have drastic effects on the current organization and its children. Ensure any changes to this setting are intended. Learn more about release channels: https://support.google.com/chrome/a/answer/1375678#release_channel?hl={$languageCode}.",
-				"knownValueDescriptions": [
-					{
-						"value": "RELEASE_CHANNEL_WITH_LTS_ENUM_ALLOW_USER_CHOICE",
-						"description": "Allow user to configure."
-					},
-					{
-						"value": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
-						"description": "Stable channel."
-					},
-					{
-						"value": "RELEASE_CHANNEL_WITH_LTS_ENUM_BETA_CHANNEL",
-						"description": "Beta channel."
-					},
-					{
-						"value": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTS_CHANNEL",
-						"description": "Long-term support channel."
-					},
-					{
-						"value": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTC_CHANNEL",
-						"description": "Long-term support candidate channel."
-					},
-					{
-						"value": "RELEASE_CHANNEL_WITH_LTS_ENUM_DEV_CHANNEL",
-						"description": "Dev channel (may be unstable)."
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "true"
-					},
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"defaultValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
-				"name": "Release channel.",
-				"fieldDescription": "Changing the release channel can have drastic effects on the current organization and its children. Ensure any changes to this setting are intended. Learn more about release channels: https://support.google.com/chrome/a/answer/1375678#release_channel?hl={$languageCode}.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "deviceAutoUpdatePeerToPeerEnabled",
-				"description": "Peer to peer. Controls whether peer to peer auto update downloads are allowed.",
-				"knownValueDescriptions": [
-					{
-						"value": "true",
-						"description": "Allow peer to peer auto update downloads."
-					},
-					{
-						"value": "false",
-						"description": "Do not allow peer to peer auto update downloads."
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "true"
-					},
-					{
-						"sourceField": "updateDisabled",
-						"sourceFieldValue": "false"
-					}
-				],
-				"defaultValue": true,
-				"name": "Peer to peer.",
-				"fieldDescription": "Controls whether peer to peer auto update downloads are allowed.",
-				"fieldConstraints": {}
-			}
-		],
-		"notices": [
-			{
-				"field": "deviceRollbackToTargetVersion",
-				"noticeValue": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_AND_RESTORE_IF_POSSIBLE",
-				"noticeMessage": "Keep in mind: 1) To use a previous version, devices will need to be restarted. Devices will be wiped and all local data will be lost. 2) Rollback to ChromeOS version 106 or earlier is not supported. Learn more about rolling back devices here: https://support.google.com/chrome/a?p=rollback."
-			}
-		],
-		"supportUri": "https://support.google.com/chrome/a/answer/3168106?hl=en",
-		"schemaName": "chrome.devices.AutoUpdateSettings",
-		"validTargetResources": ["ORG_UNIT"],
-		"policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
-		"categoryTitle": "Device update settings",
-		"supportedPlatforms": ["CHROME_OS"]
-	},
-    {
-		"name": "customers/C022n8w1u/policySchemas/chrome.devices.DeviceExtendedAutoUpdateEnabled",
-		"policyDescription": "Extended auto-updates.",
-		"definition": {
-			"messageType": [
-				{
-					"name": "DeviceExtendedAutoUpdateEnabled",
-					"field": [
-						{
-							"name": "deviceExtendedAutoUpdateEnabled",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_BOOL"
-						}
-					]
-				}
-			]
-		},
-		"fieldDescriptions": [
-			{
-				"field": "deviceExtendedAutoUpdateEnabled",
-				"description": "Impacted devices are allowed to receive updates during the extended auto-update period. Allow eligible devices that will lose Android support to be opted in to Extended Automatic Updates. If the policy is Enabled, devices will opt in to Extended Automatic Updates. If the policy is Disabled or unset, devices will stop receiving updates after the original Auto Update Expiration date. This policy is only relevant for older models not automatically receiving extended updates.",
-				"knownValueDescriptions": [
-					{
-						"value": "true",
-						"description": "Allow updates during extended auto-update period."
-					},
-					{
-						"value": "false",
-						"description": "Disallow updates during extended auto-update period."
-					}
-				],
-				"defaultValue": false,
-				"name": "Impacted devices are allowed to receive updates during the extended auto-update period.",
-				"fieldDescription": "Allow eligible devices that will lose Android support to be opted in to Extended Automatic Updates. If the policy is Enabled, devices will opt in to Extended Automatic Updates. If the policy is Disabled or unset, devices will stop receiving updates after the original Auto Update Expiration date. This policy is only relevant for older models not automatically receiving extended updates.",
-				"fieldConstraints": {}
-			}
-		],
-		"supportUri": "https://support.google.com/chrome/a/answer/1375678?hl=en#device_extended_auto_update_enabled",
-		"schemaName": "chrome.devices.DeviceExtendedAutoUpdateEnabled",
-		"validTargetResources": ["ORG_UNIT"],
-		"policyApiLifecycle": { "policyApiLifecycleStage": "API_DEVELOPMENT" },
-		"categoryTitle": "Device update settings",
-		"supportedPlatforms": ["CHROME_OS"]
-	}
-    ,
-    {
-		"name": "customers/C022n8w1u/policySchemas/chrome.devices.AppToPinOsVersion",
-		"policyDescription": "App-controlled updates.",
-		"definition": {
-			"messageType": [
-				{
-					"name": "AppToPinOsVersion",
-					"field": [
-						{
-							"name": "appToPinOsVersion",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_STRING"
-						}
-					]
-				}
-			]
-		},
-		"fieldDescriptions": [
-			{
-				"field": "appToPinOsVersion",
-				"description": "Allows the admin to control auto update version by choosing an app whose manifest will govern update behavior.",
-				"name": "Allows the admin to control auto update version by choosing an app whose manifest will govern update behavior.",
-				"fieldConstraints": {}
-			}
-		],
-		"supportUri": "https://support.google.com/chrome/a/answer/1375678?hl=en#app_controlled_updates",
-		"schemaName": "chrome.devices.AppToPinOsVersion",
-		"validTargetResources": ["ORG_UNIT"],
-		"policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
-		"categoryTitle": "Device update settings",
-		"supportedPlatforms": ["CHROME_OS"]
-	},
-    {
-		"name": "customers/C022n8w1u/policySchemas/chrome.devices.WilcoScheduledUpdate",
-		"policyDescription": "Scheduled updates.",
-		"definition": {
-			"messageType": [
-				{
-					"name": "WilcoScheduledUpdate",
-					"field": [
-						{
-							"name": "wilcoScheduledUpdateEnabled",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_BOOL"
-						},
-						{
-							"name": "wilcoScheduledUpdateTimeOfDay",
-							"number": 2,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT64"
-						},
-						{
-							"name": "wilcoScheduledUpdateFrequency",
-							"number": 3,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "WilcoUpdateFrequencyEnum"
-						},
-						{
-							"name": "wilcoScheduledUpdateDayOfWeek",
-							"number": 4,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "WeekDayEnum"
-						},
-						{
-							"name": "wilcoScheduledUpdateDayOfMonth",
-							"number": 5,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_INT64"
-						}
-					]
-				}
-			],
-			"enumType": [
-				{
-					"name": "WilcoUpdateFrequencyEnum",
-					"value": [
-						{
-							"name": "WILCO_UPDATE_FREQUENCY_ENUM_DAILY",
-							"number": 1
-						},
-						{
-							"name": "WILCO_UPDATE_FREQUENCY_ENUM_WEEKLY",
-							"number": 2
-						},
-						{
-							"name": "WILCO_UPDATE_FREQUENCY_ENUM_MONTHLY",
-							"number": 3
-						}
-					]
-				},
-				{
-					"name": "WeekDayEnum",
-					"value": [
-						{ "name": "WEEK_DAY_ENUM_MONDAY", "number": 1 },
-						{ "name": "WEEK_DAY_ENUM_TUESDAY", "number": 2 },
-						{ "name": "WEEK_DAY_ENUM_WEDNESDAY", "number": 3 },
-						{ "name": "WEEK_DAY_ENUM_THURSDAY", "number": 4 },
-						{ "name": "WEEK_DAY_ENUM_FRIDAY", "number": 5 },
-						{ "name": "WEEK_DAY_ENUM_SATURDAY", "number": 6 },
-						{ "name": "WEEK_DAY_ENUM_SUNDAY", "number": 7 }
-					]
-				}
-			]
-		},
-		"fieldDescriptions": [
-			{
-				"field": "wilcoScheduledUpdateEnabled",
-				"description": "Controls whether scheduled updates are enabled.",
-				"knownValueDescriptions": [
-					{ "value": "true" },
-					{ "value": "false" }
-				],
-				"defaultValue": false,
-				"name": "Controls whether scheduled updates are enabled.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "wilcoScheduledUpdateTimeOfDay",
-				"description": "Allows an admin to control the time of day that scheduled updates are applied.",
-				"inputConstraint": "The long field should have value greater than or equal to zero.",
-				"knownValueDescriptions": [
-					{ "value": "0", "description": "12:00\u202fAM." },
-					{ "value": "15", "description": "12:15\u202fAM." },
-					{ "value": "30", "description": "12:30\u202fAM." },
-					{ "value": "45", "description": "12:45\u202fAM." },
-					{ "value": "60", "description": "1:00\u202fAM." },
-					{ "value": "75", "description": "1:15\u202fAM." },
-					{ "value": "90", "description": "1:30\u202fAM." },
-					{ "value": "105", "description": "1:45\u202fAM." },
-					{ "value": "120", "description": "2:00\u202fAM." },
-					{ "value": "135", "description": "2:15\u202fAM." },
-					{ "value": "150", "description": "2:30\u202fAM." },
-					{ "value": "165", "description": "2:45\u202fAM." },
-					{ "value": "180", "description": "3:00\u202fAM." },
-					{ "value": "195", "description": "3:15\u202fAM." },
-					{ "value": "210", "description": "3:30\u202fAM." },
-					{ "value": "225", "description": "3:45\u202fAM." },
-					{ "value": "240", "description": "4:00\u202fAM." },
-					{ "value": "255", "description": "4:15\u202fAM." },
-					{ "value": "270", "description": "4:30\u202fAM." },
-					{ "value": "285", "description": "4:45\u202fAM." },
-					{ "value": "300", "description": "5:00\u202fAM." },
-					{ "value": "315", "description": "5:15\u202fAM." },
-					{ "value": "330", "description": "5:30\u202fAM." },
-					{ "value": "345", "description": "5:45\u202fAM." },
-					{ "value": "360", "description": "6:00\u202fAM." },
-					{ "value": "375", "description": "6:15\u202fAM." },
-					{ "value": "390", "description": "6:30\u202fAM." },
-					{ "value": "405", "description": "6:45\u202fAM." },
-					{ "value": "420", "description": "7:00\u202fAM." },
-					{ "value": "435", "description": "7:15\u202fAM." },
-					{ "value": "450", "description": "7:30\u202fAM." },
-					{ "value": "465", "description": "7:45\u202fAM." },
-					{ "value": "480", "description": "8:00\u202fAM." },
-					{ "value": "495", "description": "8:15\u202fAM." },
-					{ "value": "510", "description": "8:30\u202fAM." },
-					{ "value": "525", "description": "8:45\u202fAM." },
-					{ "value": "540", "description": "9:00\u202fAM." },
-					{ "value": "555", "description": "9:15\u202fAM." },
-					{ "value": "570", "description": "9:30\u202fAM." },
-					{ "value": "585", "description": "9:45\u202fAM." },
-					{ "value": "600", "description": "10:00\u202fAM." },
-					{ "value": "615", "description": "10:15\u202fAM." },
-					{ "value": "630", "description": "10:30\u202fAM." },
-					{ "value": "645", "description": "10:45\u202fAM." },
-					{ "value": "660", "description": "11:00\u202fAM." },
-					{ "value": "675", "description": "11:15\u202fAM." },
-					{ "value": "690", "description": "11:30\u202fAM." },
-					{ "value": "705", "description": "11:45\u202fAM." },
-					{ "value": "720", "description": "12:00\u202fPM." },
-					{ "value": "735", "description": "12:15\u202fPM." },
-					{ "value": "750", "description": "12:30\u202fPM." },
-					{ "value": "765", "description": "12:45\u202fPM." },
-					{ "value": "780", "description": "1:00\u202fPM." },
-					{ "value": "795", "description": "1:15\u202fPM." },
-					{ "value": "810", "description": "1:30\u202fPM." },
-					{ "value": "825", "description": "1:45\u202fPM." },
-					{ "value": "840", "description": "2:00\u202fPM." },
-					{ "value": "855", "description": "2:15\u202fPM." },
-					{ "value": "870", "description": "2:30\u202fPM." },
-					{ "value": "885", "description": "2:45\u202fPM." },
-					{ "value": "900", "description": "3:00\u202fPM." },
-					{ "value": "915", "description": "3:15\u202fPM." },
-					{ "value": "930", "description": "3:30\u202fPM." },
-					{ "value": "945", "description": "3:45\u202fPM." },
-					{ "value": "960", "description": "4:00\u202fPM." },
-					{ "value": "975", "description": "4:15\u202fPM." },
-					{ "value": "990", "description": "4:30\u202fPM." },
-					{ "value": "1005", "description": "4:45\u202fPM." },
-					{ "value": "1020", "description": "5:00\u202fPM." },
-					{ "value": "1035", "description": "5:15\u202fPM." },
-					{ "value": "1050", "description": "5:30\u202fPM." },
-					{ "value": "1065", "description": "5:45\u202fPM." },
-					{ "value": "1080", "description": "6:00\u202fPM." },
-					{ "value": "1095", "description": "6:15\u202fPM." },
-					{ "value": "1110", "description": "6:30\u202fPM." },
-					{ "value": "1125", "description": "6:45\u202fPM." },
-					{ "value": "1140", "description": "7:00\u202fPM." },
-					{ "value": "1155", "description": "7:15\u202fPM." },
-					{ "value": "1170", "description": "7:30\u202fPM." },
-					{ "value": "1185", "description": "7:45\u202fPM." },
-					{ "value": "1200", "description": "8:00\u202fPM." },
-					{ "value": "1215", "description": "8:15\u202fPM." },
-					{ "value": "1230", "description": "8:30\u202fPM." },
-					{ "value": "1245", "description": "8:45\u202fPM." },
-					{ "value": "1260", "description": "9:00\u202fPM." },
-					{ "value": "1275", "description": "9:15\u202fPM." },
-					{ "value": "1290", "description": "9:30\u202fPM." },
-					{ "value": "1305", "description": "9:45\u202fPM." },
-					{ "value": "1320", "description": "10:00\u202fPM." },
-					{ "value": "1335", "description": "10:15\u202fPM." },
-					{ "value": "1350", "description": "10:30\u202fPM." },
-					{ "value": "1365", "description": "10:45\u202fPM." },
-					{ "value": "1380", "description": "11:00\u202fPM." },
-					{ "value": "1395", "description": "11:15\u202fPM." },
-					{ "value": "1410", "description": "11:30\u202fPM." },
-					{ "value": "1425", "description": "11:45\u202fPM." }
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "wilcoScheduledUpdateEnabled",
-						"sourceFieldValue": "true"
-					}
-				],
-				"name": "Allows an admin to control the time of day that scheduled updates are applied.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "wilcoScheduledUpdateFrequency",
-				"description": "Controls how often (daily, weekly, monthly) the device should check for ChromeOS updates.",
-				"knownValueDescriptions": [
-                    {
-                        "value": "WILCO_UPDATE_FREQUENCY_ENUM_DAILY",
-                        "description": "Daily updates."
+  {
+    "name": "customers/C022n8w1u/policySchemas/chrome.devices.AutoUpdateSettings",
+    "policyDescription": "Auto-update settings.",
+    "definition": {
+      "messageType": [
+        {
+          "name": "AutoUpdateSettings",
+          "field": [
+            {
+              "name": "updateDisabled",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_BOOL"
+            },
+            {
+              "name": "rebootAfterUpdate",
+              "number": 2,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_BOOL"
+            },
+            {
+              "name": "autoUpdateAllowedConnectionType",
+              "number": 3,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "AutoUpdateConnectionTypeEnum"
+            },
+            {
+              "name": "deviceRollbackToTargetVersion",
+              "number": 5,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "RollbackToTargetVersionEnum"
+            },
+            {
+              "name": "autoUpdateRolloutPlan",
+              "number": 6,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "AutoUpdateRolloutPlan"
+            },
+            {
+              "name": "autoUpdateTimeRestrictions",
+              "number": 7,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "AutoUpdateTimeRestrictions"
+            },
+            {
+              "name": "autoUpdateTargetVersionLts",
+              "number": 8,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "AutoUpdateTargetVersionLts"
+            },
+            {
+              "name": "deviceMinimumVersionAueMessage",
+              "number": 9,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_STRING"
+            },
+            {
+              "name": "deviceMinimumVersion",
+              "number": 10,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "DeviceMinimumVersion"
+            },
+            {
+              "name": "autoUpdateHttpDownloadsEnabled",
+              "number": 11,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_BOOL"
+            },
+            {
+              "name": "releaseChannelWithLts",
+              "number": 12,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "ReleaseChannelWithLtsEnum"
+            },
+            {
+              "name": "deviceAutoUpdatePeerToPeerEnabled",
+              "number": 13,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_BOOL"
+            }
+          ]
+        },
+        {
+          "name": "AutoUpdateRolloutPlan",
+          "field": [
+            {
+              "name": "plan",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "RolloutPlan"
+            },
+            {
+              "name": "stages",
+              "number": 2,
+              "label": "LABEL_REPEATED",
+              "type": "TYPE_MESSAGE",
+              "typeName": "Stage"
+            },
+            {
+              "name": "scatter",
+              "number": 3,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "ScatterFactor"
+            }
+          ]
+        },
+        {
+          "name": "Stage",
+          "field": [
+            {
+              "name": "days",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT32"
+            },
+            {
+              "name": "percentage",
+              "number": 2,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT32"
+            }
+          ]
+        },
+        {
+          "name": "AutoUpdateTimeRestrictions",
+          "field": [
+            {
+              "name": "timeRestriction",
+              "number": 1,
+              "label": "LABEL_REPEATED",
+              "type": "TYPE_MESSAGE",
+              "typeName": "TimeRestriction"
+            }
+          ]
+        },
+        {
+          "name": "TimeRestriction",
+          "field": [
+            {
+              "name": "start",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "DayAndTime"
+            },
+            {
+              "name": "end",
+              "number": 2,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "DayAndTime"
+            }
+          ]
+        },
+        {
+          "name": "DayAndTime",
+          "field": [
+            {
+              "name": "dayOfWeek",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "DayOfWeek"
+            },
+            {
+              "name": "hours",
+              "number": 2,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT32"
+            },
+            {
+              "name": "minutes",
+              "number": 3,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT32"
+            }
+          ]
+        },
+        {
+          "name": "AutoUpdateTargetVersionLts",
+          "field": [
+            {
+              "name": "selectedVersion",
+              "number": 5,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_MESSAGE",
+              "typeName": "SelectedVersion"
+            }
+          ]
+        },
+        {
+          "name": "SelectedVersion",
+          "field": [
+            {
+              "name": "displayName",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_STRING"
+            }
+          ]
+        },
+        {
+          "name": "DeviceMinimumVersion",
+          "field": [
+            {
+              "name": "chromeosVersion",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_STRING"
+            },
+            {
+              "name": "aueWarningPeriodDays",
+              "number": 2,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT64"
+            },
+            {
+              "name": "warningPeriodDays",
+              "number": 3,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT64"
+            }
+          ]
+        }
+      ],
+      "enumType": [
+        {
+          "name": "AutoUpdateConnectionTypeEnum",
+          "value": [
+            {
+              "name": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_WIFI_AND_ETHERNET",
+              "number": 1
+            },
+            {
+              "name": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_ALL_CONNECTIONS",
+              "number": 2
+            }
+          ]
+        },
+        {
+          "name": "RollbackToTargetVersionEnum",
+          "value": [
+            {
+              "name": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_DISABLED",
+              "number": 1
+            },
+            {
+              "name": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_AND_RESTORE_IF_POSSIBLE",
+              "number": 3
+            }
+          ]
+        },
+        {
+          "name": "RolloutPlan",
+          "value": [
+            { "name": "DEFAULT_UPDATES", "number": 1 },
+            { "name": "SCATTER_UPDATES", "number": 2 },
+            { "name": "SCHEDULE_UPDATES", "number": 3 }
+          ]
+        },
+        {
+          "name": "ScatterFactor",
+          "value": [
+            { "name": "NO_SCATTER_FACTOR", "number": 1 },
+            { "name": "ONE_DAY", "number": 2 },
+            { "name": "TWO_DAYS", "number": 3 },
+            { "name": "THREE_DAYS", "number": 4 },
+            { "name": "FOUR_DAYS", "number": 5 },
+            { "name": "FIVE_DAYS", "number": 6 },
+            { "name": "SIX_DAYS", "number": 7 },
+            { "name": "SEVEN_DAYS", "number": 8 },
+            { "name": "EIGHT_DAYS", "number": 9 },
+            { "name": "NINE_DAYS", "number": 10 },
+            { "name": "TEN_DAYS", "number": 11 },
+            { "name": "ELEVEN_DAYS", "number": 12 },
+            { "name": "TWELVE_DAYS", "number": 13 },
+            { "name": "THIRTEEN_DAYS", "number": 14 },
+            { "name": "FOURTEEN_DAYS", "number": 15 }
+          ]
+        },
+        {
+          "name": "DayOfWeek",
+          "value": [
+            { "name": "MONDAY", "number": 1 },
+            { "name": "TUESDAY", "number": 2 },
+            { "name": "WEDNESDAY", "number": 3 },
+            { "name": "THURSDAY", "number": 4 },
+            { "name": "FRIDAY", "number": 5 },
+            { "name": "SATURDAY", "number": 6 },
+            { "name": "SUNDAY", "number": 7 }
+          ]
+        },
+        {
+          "name": "ReleaseChannelWithLtsEnum",
+          "value": [
+            {
+              "name": "RELEASE_CHANNEL_WITH_LTS_ENUM_ALLOW_USER_CHOICE",
+              "number": 1
+            },
+            {
+              "name": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
+              "number": 2
+            },
+            {
+              "name": "RELEASE_CHANNEL_WITH_LTS_ENUM_BETA_CHANNEL",
+              "number": 3
+            },
+            {
+              "name": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTS_CHANNEL",
+              "number": 4
+            },
+            {
+              "name": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTC_CHANNEL",
+              "number": 5
+            },
+            {
+              "name": "RELEASE_CHANNEL_WITH_LTS_ENUM_DEV_CHANNEL",
+              "number": 6
+            }
+          ]
+        }
+      ]
+    },
+    "fieldDescriptions": [
+      {
+        "field": "updateDisabled",
+        "description": "Allow devices to automatically update OS version. Controls whether managed ChromeOS devices install updates.",
+        "knownValueDescriptions": [
+          { "value": "true", "description": "Block updates." },
+          { "value": "false", "description": "Allow updates." }
+        ],
+        "defaultValue": false,
+        "name": "Allow devices to automatically update OS version.",
+        "fieldDescription": "Controls whether managed ChromeOS devices install updates.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "rebootAfterUpdate",
+        "description": "Auto reboot after updates. Controls whether a managed ChromeOS device reboots after it is updated.",
+        "knownValueDescriptions": [
+          { "value": "true", "description": "Allow auto-reboots." },
+          {
+            "value": "false",
+            "description": "Disallow auto-reboots."
+          }
+        ],
+
+        "defaultValue": false,
+        "name": "Auto reboot after updates.",
+        "fieldDescription": "Controls whether a managed ChromeOS device reboots after it is updated.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "autoUpdateAllowedConnectionType",
+        "description": "Updates over cellular. Controls whether a managed ChromeOS device updates over Wi-Fi and Ethernet only or using any connection type, including cellular.",
+        "knownValueDescriptions": [
+          {
+            "value": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_WIFI_AND_ETHERNET",
+            "description": "Allow automatic updates over Wi-Fi and Ethernet only."
+          },
+          {
+            "value": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_ALL_CONNECTIONS",
+            "description": "Allow automatic updates on all connections, including cellular."
+          }
+        ],
+        "fieldDependencies": [],
+        "defaultValue": "AUTO_UPDATE_CONNECTION_TYPE_ENUM_WIFI_AND_ETHERNET",
+        "name": "Updates over cellular.",
+        "fieldDescription": "Controls whether a managed ChromeOS device updates over Wi-Fi and Ethernet only or using any connection type, including cellular.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "deviceRollbackToTargetVersion",
+        "description": "Roll back to target version. To use a previous version, devices will need to be restarted. Devices will be wiped and all local data will be lost. Learn more about rolling back devices here: https://support.google.com/chrome/a?p=rollback.",
+        "knownValueDescriptions": [
+          {
+            "value": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_DISABLED",
+            "description": "Do not roll back OS."
+          },
+          {
+            "value": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_AND_RESTORE_IF_POSSIBLE",
+            "description": "Roll back OS."
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "defaultValue": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_DISABLED",
+        "name": "Roll back to target version.",
+        "fieldDescription": "To use a previous version, devices will need to be restarted. Devices will be wiped and all local data will be lost. Learn more about rolling back devices here: https://support.google.com/chrome/a?p=rollback.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "autoUpdateRolloutPlan",
+        "description": "Allows the admin to specify a timed rollout plan for automatic updates.",
+        "nestedFieldDescriptions": [
+          {
+            "field": "plan",
+            "description": "Update rollout plan.",
+            "knownValueDescriptions": [
+              {
+                "value": "DEFAULT_UPDATES",
+                "description": "Default (devices should update as soon as a new version is available)."
+              },
+              {
+                "value": "SCHEDULE_UPDATES",
+                "description": "Roll out updates over a specific schedule."
+              },
+              {
+                "value": "SCATTER_UPDATES",
+                "description": "Scatter updates."
+              }
+            ],
+            "defaultValue": "DEFAULT_UPDATES",
+            "name": "Update rollout plan.",
+            "fieldConstraints": {}
+          },
+          {
+            "field": "stages",
+            "description": "Rollout stages.",
+            "nestedFieldDescriptions": [
+              {
+                "field": "days",
+                "description": "Days.",
+                "name": "Days.",
+                "fieldConstraints": {}
+              },
+              {
+                "field": "percentage",
+                "description": "Percentage.",
+                "name": "Percentage.",
+                "fieldConstraints": {}
+              }
+            ],
+            "name": "Rollout stages.",
+            "fieldDependencies": [
+              {
+                "sourceField": "plan",
+                "sourceFieldValue": "SCHEDULE_UPDATES"
+              }
+            ],
+            "fieldConstraints": {}
+          },
+          {
+            "field": "scatter",
+            "description": "Scatter Factor.",
+            "knownValueDescriptions": [
+              {
+                "value": "NO_SCATTER_FACTOR",
+                "description": "No scatter factor."
+              },
+              {
+                "value": "ONE_DAY",
+                "description": "Scatter updates over one day."
+              },
+              {
+                "value": "TWO_DAYS",
+                "description": "Scatter updates over two days."
+              },
+              {
+                "value": "THREE_DAYS",
+                "description": "Scatter updates over three days."
+              },
+              {
+                "value": "FOUR_DAYS",
+                "description": "Scatter updates over four days."
+              },
+              {
+                "value": "FIVE_DAYS",
+                "description": "Scatter updates over five days."
+              },
+              {
+                "value": "SIX_DAYS",
+                "description": "Scatter updates over six days."
+              },
+              {
+                "value": "SEVEN_DAYS",
+                "description": "Scatter updates over seven days."
+              },
+              {
+                "value": "EIGHT_DAYS",
+                "description": "Scatter updates over eight days."
+              },
+              {
+                "value": "NINE_DAYS",
+                "description": "Scatter updates over nine days."
+              },
+              {
+                "value": "TEN_DAYS",
+                "description": "Scatter updates over ten days."
+              },
+              {
+                "value": "ELEVEN_DAYS",
+                "description": "Scatter updates over eleven days."
+              },
+              {
+                "value": "TWELVE_DAYS",
+                "description": "Scatter updates over twelve days."
+              },
+              {
+                "value": "THIRTEEN_DAYS",
+                "description": "Scatter updates over thirteen days."
+              },
+              {
+                "value": "FOURTEEN_DAYS",
+                "description": "Scatter updates over fourteen days."
+              }
+            ],
+            "name": "Scatter Factor.",
+            "fieldConstraints": {}
+          }
+        ],
+        "fieldDependencies": [],
+        "name": "Allows the admin to specify a timed rollout plan for automatic updates.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "autoUpdateTimeRestrictions",
+        "description": "Allows the admin to specify time restrictions for when automatic updates take place.",
+        "nestedFieldDescriptions": [
+          {
+            "field": "timeRestriction",
+            "description": "Update time restrictions.",
+            "nestedFieldDescriptions": [
+              {
+                "field": "start",
+                "description": "Start.",
+                "nestedFieldDescriptions": [
+                  {
+                    "field": "dayOfWeek",
+                    "description": "Day of week.",
+                    "knownValueDescriptions": [
+                      {
+                        "value": "MONDAY",
+                        "description": "Monday."
                       },
                       {
-                        "value": "WILCO_UPDATE_FREQUENCY_ENUM_WEEKLY",
-                        "description": "Weekly updates."
+                        "value": "TUESDAY",
+                        "description": "Tuesday."
                       },
                       {
-                        "value": "WILCO_UPDATE_FREQUENCY_ENUM_MONTHLY",
-                        "description": "Monthly updates."
+                        "value": "WEDNESDAY",
+                        "description": "Wednesday."
+                      },
+                      {
+                        "value": "THURSDAY",
+                        "description": "Thursday."
+                      },
+                      {
+                        "value": "FRIDAY",
+                        "description": "Friday."
+                      },
+                      {
+                        "value": "SATURDAY",
+                        "description": "Saturday."
+                      },
+                      {
+                        "value": "SUNDAY",
+                        "description": "Sunday."
                       }
-             
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "wilcoScheduledUpdateEnabled",
-						"sourceFieldValue": "true"
-					}
-				],
-				"defaultValue": "WILCO_UPDATE_FREQUENCY_ENUM_DAILY",
-				"name": "Controls how often (daily, weekly, monthly) the device should check for ChromeOS updates.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "wilcoScheduledUpdateDayOfWeek",
-				"description": "Specifies the day of the week on which weekly updates should occur.",
-				"knownValueDescriptions": [
-                    { "value": "WEEK_DAY_ENUM_MONDAY", "description": "Monday" },
-                    { "value": "WEEK_DAY_ENUM_TUESDAY", "description": "Tuesday" },
-                    { "value": "WEEK_DAY_ENUM_WEDNESDAY", "description": "Wednesday" },
-                    { "value": "WEEK_DAY_ENUM_THURSDAY", "description": "Thursday" },
-                    { "value": "WEEK_DAY_ENUM_FRIDAY", "description": "Friday" },
-                    { "value": "WEEK_DAY_ENUM_SATURTADY", "description": "Saturday" },
-                    { "value": "WEEK_DAY_ENUM_SUNDAY", "description": "sunday" }
-           
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "wilcoScheduledUpdateEnabled",
-						"sourceFieldValue": "true"
-					}
-				],
-				"defaultValue": "WEEK_DAY_ENUM_MONDAY",
-				"name": "Specifies the day of the week on which weekly updates should occur.",
-				"fieldConstraints": {}
-			},
-			{
-				"field": "wilcoScheduledUpdateDayOfMonth",
-				"description": "Specifies a day each month on which the device will check for updates.",
-				"inputConstraint": "The long field should have value greater than or equal to zero.",
-				"knownValueDescriptions": [
-					{
-						"value": "1",
-						"description": "The 1st day of the month."
-					},
-					{
-						"value": "2",
-						"description": "The 2nd day of the month."
-					},
-					{
-						"value": "3",
-						"description": "The 3rd day of the month."
-					},
-					{
-						"value": "4",
-						"description": "The 4th day of the month."
-					},
-					{
-						"value": "5",
-						"description": "The 5th day of the month."
-					},
-					{
-						"value": "6",
-						"description": "The 6th day of the month."
-					},
-					{
-						"value": "7",
-						"description": "The 7th day of the month."
-					},
-					{
-						"value": "8",
-						"description": "The 8th day of the month."
-					},
-					{
-						"value": "9",
-						"description": "The 9th day of the month."
-					},
-					{
-						"value": "10",
-						"description": "The 10th day of the month."
-					},
-					{
-						"value": "11",
-						"description": "The 11th day of the month."
-					},
-					{
-						"value": "12",
-						"description": "The 12th day of the month."
-					},
-					{
-						"value": "13",
-						"description": "The 13th day of the month."
-					},
-					{
-						"value": "14",
-						"description": "The 14th day of the month."
-					},
-					{
-						"value": "15",
-						"description": "The 15th day of the month."
-					},
-					{
-						"value": "16",
-						"description": "The 16th day of the month."
-					},
-					{
-						"value": "17",
-						"description": "The 17th day of the month."
-					},
-					{
-						"value": "18",
-						"description": "The 18th day of the month."
-					},
-					{
-						"value": "19",
-						"description": "The 19th day of the month."
-					},
-					{
-						"value": "20",
-						"description": "The 20th day of the month."
-					},
-					{
-						"value": "21",
-						"description": "The 21st day of the month."
-					},
-					{
-						"value": "22",
-						"description": "The 22nd day of the month."
-					},
-					{
-						"value": "23",
-						"description": "The 23rd day of the month."
-					},
-					{
-						"value": "24",
-						"description": "The 24th day of the month."
-					},
-					{
-						"value": "25",
-						"description": "The 25th day of the month."
-					},
-					{
-						"value": "26",
-						"description": "The 26th day of the month."
-					},
-					{
-						"value": "27",
-						"description": "The 27th day of the month."
-					},
-					{
-						"value": "28",
-						"description": "The 28th day of the month."
-					},
-					{
-						"value": "29",
-						"description": "The 29th day of the month."
-					},
-					{
-						"value": "30",
-						"description": "The 30th day of the month."
-					},
-					{
-						"value": "31",
-						"description": "The 31st day of the month."
-					}
-				],
-				"fieldDependencies": [
-					{
-						"sourceField": "wilcoScheduledUpdateEnabled",
-						"sourceFieldValue": "true"
-					}
-				],
-				"name": "Specifies a day each month on which the device will check for updates.",
-				"fieldConstraints": {}
-			}
-		],
-		"accessRestrictions": [
-			"This policy only affects device types: Dell Latitude 5400 Chromebook Enterprise, Dell Latitude 5300 2-in-1 Chromebook Enterprise, Dell Latitude 7410 Chromebook Enterprise, Dell Latitude 7410 2-in-1 Chromebook Enterprise."
-		],
-		"schemaName": "chrome.devices.WilcoScheduledUpdate",
-		"validTargetResources": ["ORG_UNIT"],
-		"policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
-		"categoryTitle": "Device update settings",
-		"supportedPlatforms": ["CHROME_OS"]
-	},
-    {
-		"name": "customers/C022n8w1u/policySchemas/chrome.devices.Variations",
-		"policyDescription": "Variations.",
-		"definition": {
-			"messageType": [
-				{
-					"name": "Variations",
-					"field": [
-						{
-							"name": "deviceVariationsEnabled",
-							"number": 1,
-							"label": "LABEL_OPTIONAL",
-							"type": "TYPE_ENUM",
-							"typeName": "DeviceVariationsLevelEnum"
-						}
-					]
-				}
-			],
-			"enumType": [
-				{
-					"name": "DeviceVariationsLevelEnum",
-					"value": [
-						{
-							"name": "DEVICE_VARIATIONS_LEVEL_ENUM_ENABLED",
-							"number": 1
-						},
-						{
-							"name": "DEVICE_VARIATIONS_LEVEL_ENUM_CRITICAL_FIXES_ONLY",
-							"number": 2
-						},
-						{
-							"name": "DEVICE_VARIATIONS_LEVEL_ENUM_DISABLED",
-							"number": 3
-						}
-					]
-				}
-			]
-		},
-		"fieldDescriptions": [
-			{
-				"field": "deviceVariationsEnabled",
-				"description": "Chrome Variations. Controls which Chrome Variations are enabled, disabled, or enabled for critical fixes only on devices.",
-				"knownValueDescriptions": [
-					{
-						"value": "DEVICE_VARIATIONS_LEVEL_ENUM_ENABLED",
-						"description": "Enable Chrome variations."
-					},
-					{
-						"value": "DEVICE_VARIATIONS_LEVEL_ENUM_CRITICAL_FIXES_ONLY",
-						"description": "Enable variations for critical fixes only."
-					},
-					{
-						"value": "DEVICE_VARIATIONS_LEVEL_ENUM_DISABLED",
-						"description": "Disable variations."
-					}
-				],
-				"defaultValue": "DEVICE_VARIATIONS_LEVEL_ENUM_ENABLED",
-				"name": "Chrome Variations.",
-				"fieldDescription": "Controls which Chrome Variations are enabled, disabled, or enabled for critical fixes only on devices.",
-				"fieldConstraints": {}
-			}
-		],
-		"notices": [
-			{
-				"field": "deviceVariationsEnabled",
-				"noticeValue": "DEVICE_VARIATIONS_LEVEL_ENUM_DISABLED",
-				"noticeMessage": "Disabling variations significantly increases the risk of future security and compatibility issues and is not recommended."
-			}
-		],
-		"schemaName": "chrome.devices.Variations",
-		"validTargetResources": ["ORG_UNIT"],
-		"policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
-		"categoryTitle": "Device update settings",
-		"supportedPlatforms": ["CHROME_OS"]
-	}
+                    ],
+                    "name": "Day of week.",
+                    "fieldConstraints": {}
+                  },
+                  {
+                    "field": "hours",
+                    "description": "Hours.",
+                    "name": "Hours.",
+                    "fieldConstraints": {}
+                  },
+                  {
+                    "field": "minutes",
+                    "description": "Minutes.",
+                    "knownValueDescriptions": [
+                      {
+                        "value": "0",
+                        "description": "0."
+                      },
+                      {
+                        "value": "15",
+                        "description": "15."
+                      },
+                      {
+                        "value": "30",
+                        "description": "30."
+                      },
+                      {
+                        "value": "45",
+                        "description": "45."
+                      }
+                    ],
+                    "name": "Minutes.",
+                    "fieldConstraints": {}
+                  }
+                ],
+                "name": "Start.",
+                "fieldConstraints": {}
+              },
+              {
+                "field": "end",
+                "description": "End.",
+                "name": "End.",
+                "fieldConstraints": {}
+              }
+            ],
+            "name": "Update time restrictions.",
+            "fieldConstraints": {}
+          }
+        ],
+        "fieldDependencies": [],
+        "name": "Allows the admin to specify time restrictions for when automatic updates take place.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "autoUpdateTargetVersionLts",
+        "description": "Specifies the prefix of a target version Google ChromeOS should update to. If the device is running a version that's before the specified prefix, it will update to the latest version with the given prefix. If the device is already on a later version, effects depend on the value of DeviceRollbackToTargetVersion.",
+        "nestedFieldDescriptions": [
+          {
+            "field": "selectedVersion",
+            "description": "Selected auto update version.",
+            "nestedFieldDescriptions": [
+              {
+                "field": "displayName",
+                "description": "Version name.",
+                "knownValueDescriptions": [
+                  {
+                    "value": "No restriction",
+                    "description": "Use latest available version."
+                  },
+                  {
+                    "value": "127.*",
+                    "description": "127.*."
+                  },
+                  {
+                    "value": "128.*",
+                    "description": "128.*."
+                  },
+                  {
+                    "value": "129.*",
+                    "description": "129.*."
+                  },
+                  {
+                    "value": "130.*",
+                    "description": "130.*."
+                  },
+                  {
+                    "value": "126.* (long-term support)",
+                    "description": "126.* (long-term support).",
+                    "fieldDependencies": [
+                      {
+                        "sourceField": "releaseChannelWithLts",
+                        "sourceFieldValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTS_CHANNEL"
+                      },
+                      {
+                        "sourceField": "releaseChannelWithLts",
+                        "sourceFieldValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTC_CHANNEL"
+                      }
+                    ]
+                  }
+                ],
+                "name": "Version name.",
+                "fieldConstraints": {}
+              }
+            ],
+            "name": "Selected auto update version.",
+            "fieldConstraints": {}
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "name": "Specifies the prefix of a target version Google ChromeOS should update to. If the device is running a version that's before the specified prefix, it will update to the latest version with the given prefix. If the device is already on a later version, effects depend on the value of DeviceRollbackToTargetVersion.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "deviceMinimumVersionAueMessage",
+        "description": "Final automatic update alert message. When a device reaches its last automatic update(https://support.google.com/chrome/a/answer/6220366)automatic , an alert is sent to the user. This text overrides the default message that will be shown on the device.",
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "true"
+          },
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "name": "Final automatic update alert message.",
+        "fieldDescription": "When a device reaches its last automatic update(https://support.google.com/chrome/a/answer/6220366)automatic , an alert is sent to the user. This text overrides the default message that will be shown on the device.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "deviceMinimumVersion",
+        "description": "Sets the minimum version of ChromeOS a device must be updated to.",
+        "nestedFieldDescriptions": [
+          {
+            "field": "chromeosVersion",
+            "description": "Chrome version.",
+            "knownValueDescriptions": [
+              {
+                "value": "",
+                "description": "Do not enforce updates."
+              },
+              { "value": "13421", "description": "86.*." },
+              { "value": "13505", "description": "87.*." },
+              { "value": "13597", "description": "88.*." },
+              { "value": "13729", "description": "89.*." },
+              { "value": "13816", "description": "90.*." },
+              { "value": "13904", "description": "91.*." },
+              { "value": "13982", "description": "92.*." },
+              { "value": "14092", "description": "93.*." },
+              { "value": "14150", "description": "94.*." },
+              { "value": "14268", "description": "96.*." },
+              { "value": "14324", "description": "97.*." },
+              { "value": "14388", "description": "98.*." },
+              { "value": "14469", "description": "99.*." },
+              { "value": "14526", "description": "100.*." },
+              { "value": "14588", "description": "101.*." },
+              { "value": "14695", "description": "102.*." },
+              { "value": "14816", "description": "103.*." },
+              { "value": "14909", "description": "104.*." },
+              { "value": "14989", "description": "105.*." },
+              { "value": "15054", "description": "106.*." },
+              { "value": "15117", "description": "107.*." },
+              { "value": "15183", "description": "108.*." },
+              { "value": "15236", "description": "109.*." },
+              { "value": "15278", "description": "110.*." },
+              { "value": "15329", "description": "111.*." },
+              { "value": "15359", "description": "112.*." },
+              { "value": "15393", "description": "113.*." },
+              { "value": "15437", "description": "114.*." },
+              { "value": "15474", "description": "115.*." },
+              { "value": "15509", "description": "116.*." },
+              { "value": "15572", "description": "117.*." },
+              { "value": "15604", "description": "118.*." },
+              { "value": "15633", "description": "119.*." },
+              { "value": "15662", "description": "120.*." },
+              { "value": "15699", "description": "121.*." },
+              { "value": "15753", "description": "122.*." },
+              { "value": "15786", "description": "123.*." },
+              { "value": "15823", "description": "124.*." },
+              { "value": "15853", "description": "125.*." },
+              { "value": "15886", "description": "126.*." },
+              { "value": "15917", "description": "127.*." },
+              { "value": "15964", "description": "128.*." },
+              { "value": "16002", "description": "129.*." }
+            ],
+            "name": "Chrome version.",
+            "fieldConstraints": {}
+          },
+          {
+            "field": "aueWarningPeriodDays",
+            "description": "Extended period to update for Auto Update Expiration devices (AUE).",
+            "knownValueDescriptions": [
+              { "value": "0", "description": "No warning." },
+              { "value": "7", "description": "One week." },
+              { "value": "14", "description": "Two weeks." },
+              { "value": "21", "description": "Three weeks." },
+              { "value": "28", "description": "Four weeks." },
+              { "value": "35", "description": "Five weeks." },
+              { "value": "42", "description": "Six weeks." },
+              { "value": "49", "description": "Seven weeks." },
+              { "value": "56", "description": "Eight weeks." },
+              { "value": "63", "description": "Nine weeks." },
+              { "value": "70", "description": "Ten weeks." },
+              { "value": "77", "description": "Eleven weeks." },
+              { "value": "84", "description": "Twelve weeks." }
+            ],
+            "name": "Extended period to update for Auto Update Expiration devices (AUE).",
+            "fieldConstraints": {}
+          },
+          {
+            "field": "warningPeriodDays",
+            "description": "Period to block devices and user sessions after if the device is not update to chrome_version.",
+            "knownValueDescriptions": [
+              { "value": "0", "description": "No warning." },
+              { "value": "7", "description": "One week." },
+              { "value": "14", "description": "Two weeks." },
+              { "value": "21", "description": "Three weeks." },
+              { "value": "28", "description": "Four weeks." },
+              { "value": "35", "description": "Five weeks." },
+              { "value": "42", "description": "Six weeks." }
+            ],
+            "name": "Period to block devices and user sessions after if the device is not update to chrome_version.",
+            "fieldConstraints": {}
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "true"
+          },
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "name": "Sets the minimum version of ChromeOS a device must be updated to.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "autoUpdateHttpDownloadsEnabled",
+        "description": "Update downloads. Controls whether update downloads use HTTP or HTTPS.",
+        "knownValueDescriptions": [
+          {
+            "value": "true",
+            "description": "Use HTTP for update downloads."
+          },
+          {
+            "value": "false",
+            "description": "Use HTTPS for update downloads."
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "true"
+          },
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "defaultValue": false,
+        "name": "Update downloads.",
+        "fieldDescription": "Controls whether update downloads use HTTP or HTTPS.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "releaseChannelWithLts",
+        "description": "Release channel. Changing the release channel can have drastic effects on the current organization and its children. Ensure any changes to this setting are intended. Learn more about release channels: https://support.google.com/chrome/a/answer/1375678#release_channel?hl={$languageCode}.",
+        "knownValueDescriptions": [
+          {
+            "value": "RELEASE_CHANNEL_WITH_LTS_ENUM_ALLOW_USER_CHOICE",
+            "description": "Allow user to configure."
+          },
+          {
+            "value": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
+            "description": "Stable channel."
+          },
+          {
+            "value": "RELEASE_CHANNEL_WITH_LTS_ENUM_BETA_CHANNEL",
+            "description": "Beta channel."
+          },
+          {
+            "value": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTS_CHANNEL",
+            "description": "Long-term support channel."
+          },
+          {
+            "value": "RELEASE_CHANNEL_WITH_LTS_ENUM_LTC_CHANNEL",
+            "description": "Long-term support candidate channel."
+          },
+          {
+            "value": "RELEASE_CHANNEL_WITH_LTS_ENUM_DEV_CHANNEL",
+            "description": "Dev channel (may be unstable)."
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "true"
+          },
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "defaultValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
+        "name": "Release channel.",
+        "fieldDescription": "Changing the release channel can have drastic effects on the current organization and its children. Ensure any changes to this setting are intended. Learn more about release channels: https://support.google.com/chrome/a/answer/1375678#release_channel?hl={$languageCode}.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "deviceAutoUpdatePeerToPeerEnabled",
+        "description": "Peer to peer. Controls whether peer to peer auto update downloads are allowed.",
+        "knownValueDescriptions": [
+          {
+            "value": "true",
+            "description": "Allow peer to peer auto update downloads."
+          },
+          {
+            "value": "false",
+            "description": "Do not allow peer to peer auto update downloads."
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "true"
+          },
+          {
+            "sourceField": "updateDisabled",
+            "sourceFieldValue": "false"
+          }
+        ],
+        "defaultValue": true,
+        "name": "Peer to peer.",
+        "fieldDescription": "Controls whether peer to peer auto update downloads are allowed.",
+        "fieldConstraints": {}
+      }
+    ],
+    "notices": [
+      {
+        "field": "deviceRollbackToTargetVersion",
+        "noticeValue": "ROLLBACK_TO_TARGET_VERSION_ENUM_ROLLBACK_AND_RESTORE_IF_POSSIBLE",
+        "noticeMessage": "Keep in mind: 1) To use a previous version, devices will need to be restarted. Devices will be wiped and all local data will be lost. 2) Rollback to ChromeOS version 106 or earlier is not supported. Learn more about rolling back devices here: https://support.google.com/chrome/a?p=rollback."
+      }
+    ],
+    "supportUri": "https://support.google.com/chrome/a/answer/3168106?hl=en",
+    "schemaName": "chrome.devices.AutoUpdateSettings",
+    "validTargetResources": ["ORG_UNIT"],
+    "policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
+    "categoryTitle": "Device update settings",
+    "supportedPlatforms": ["CHROME_OS"]
+  },
+  {
+    "name": "customers/C022n8w1u/policySchemas/chrome.devices.DeviceExtendedAutoUpdateEnabled",
+    "policyDescription": "Extended auto-updates.",
+    "definition": {
+      "messageType": [
+        {
+          "name": "DeviceExtendedAutoUpdateEnabled",
+          "field": [
+            {
+              "name": "deviceExtendedAutoUpdateEnabled",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_BOOL"
+            }
+          ]
+        }
+      ]
+    },
+    "fieldDescriptions": [
+      {
+        "field": "deviceExtendedAutoUpdateEnabled",
+        "description": "Impacted devices are allowed to receive updates during the extended auto-update period. Allow eligible devices that will lose Android support to be opted in to Extended Automatic Updates. If the policy is Enabled, devices will opt in to Extended Automatic Updates. If the policy is Disabled or unset, devices will stop receiving updates after the original Auto Update Expiration date. This policy is only relevant for older models not automatically receiving extended updates.",
+        "knownValueDescriptions": [
+          {
+            "value": "true",
+            "description": "Allow updates during extended auto-update period."
+          },
+          {
+            "value": "false",
+            "description": "Disallow updates during extended auto-update period."
+          }
+        ],
+        "defaultValue": false,
+        "name": "Impacted devices are allowed to receive updates during the extended auto-update period.",
+        "fieldDescription": "Allow eligible devices that will lose Android support to be opted in to Extended Automatic Updates. If the policy is Enabled, devices will opt in to Extended Automatic Updates. If the policy is Disabled or unset, devices will stop receiving updates after the original Auto Update Expiration date. This policy is only relevant for older models not automatically receiving extended updates.",
+        "fieldConstraints": {}
+      }
+    ],
+    "supportUri": "https://support.google.com/chrome/a/answer/1375678?hl=en#device_extended_auto_update_enabled",
+    "schemaName": "chrome.devices.DeviceExtendedAutoUpdateEnabled",
+    "validTargetResources": ["ORG_UNIT"],
+    "policyApiLifecycle": { "policyApiLifecycleStage": "API_DEVELOPMENT" },
+    "categoryTitle": "Device update settings",
+    "supportedPlatforms": ["CHROME_OS"]
+  },
+  {
+    "name": "customers/C022n8w1u/policySchemas/chrome.devices.AppToPinOsVersion",
+    "policyDescription": "App-controlled updates.",
+    "definition": {
+      "messageType": [
+        {
+          "name": "AppToPinOsVersion",
+          "field": [
+            {
+              "name": "appToPinOsVersion",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_STRING"
+            }
+          ]
+        }
+      ]
+    },
+    "fieldDescriptions": [
+      {
+        "field": "appToPinOsVersion",
+        "description": "Allows the admin to control auto update version by choosing an app whose manifest will govern update behavior.",
+        "name": "Allows the admin to control auto update version by choosing an app whose manifest will govern update behavior.",
+        "fieldConstraints": {}
+      }
+    ],
+    "supportUri": "https://support.google.com/chrome/a/answer/1375678?hl=en#app_controlled_updates",
+    "schemaName": "chrome.devices.AppToPinOsVersion",
+    "validTargetResources": ["ORG_UNIT"],
+    "policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
+    "categoryTitle": "Device update settings",
+    "supportedPlatforms": ["CHROME_OS"]
+  },
+  {
+    "name": "customers/C022n8w1u/policySchemas/chrome.devices.WilcoScheduledUpdate",
+    "policyDescription": "Scheduled updates.",
+    "definition": {
+      "messageType": [
+        {
+          "name": "WilcoScheduledUpdate",
+          "field": [
+            {
+              "name": "wilcoScheduledUpdateEnabled",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_BOOL"
+            },
+            {
+              "name": "wilcoScheduledUpdateTimeOfDay",
+              "number": 2,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT64"
+            },
+            {
+              "name": "wilcoScheduledUpdateFrequency",
+              "number": 3,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "WilcoUpdateFrequencyEnum"
+            },
+            {
+              "name": "wilcoScheduledUpdateDayOfWeek",
+              "number": 4,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "WeekDayEnum"
+            },
+            {
+              "name": "wilcoScheduledUpdateDayOfMonth",
+              "number": 5,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_INT64"
+            }
+          ]
+        }
+      ],
+      "enumType": [
+        {
+          "name": "WilcoUpdateFrequencyEnum",
+          "value": [
+            {
+              "name": "WILCO_UPDATE_FREQUENCY_ENUM_DAILY",
+              "number": 1
+            },
+            {
+              "name": "WILCO_UPDATE_FREQUENCY_ENUM_WEEKLY",
+              "number": 2
+            },
+            {
+              "name": "WILCO_UPDATE_FREQUENCY_ENUM_MONTHLY",
+              "number": 3
+            }
+          ]
+        },
+        {
+          "name": "WeekDayEnum",
+          "value": [
+            { "name": "WEEK_DAY_ENUM_MONDAY", "number": 1 },
+            { "name": "WEEK_DAY_ENUM_TUESDAY", "number": 2 },
+            { "name": "WEEK_DAY_ENUM_WEDNESDAY", "number": 3 },
+            { "name": "WEEK_DAY_ENUM_THURSDAY", "number": 4 },
+            { "name": "WEEK_DAY_ENUM_FRIDAY", "number": 5 },
+            { "name": "WEEK_DAY_ENUM_SATURDAY", "number": 6 },
+            { "name": "WEEK_DAY_ENUM_SUNDAY", "number": 7 }
+          ]
+        }
+      ]
+    },
+    "fieldDescriptions": [
+      {
+        "field": "wilcoScheduledUpdateEnabled",
+        "description": "Controls whether scheduled updates are enabled.",
+        "knownValueDescriptions": [{ "value": "true" }, { "value": "false" }],
+        "defaultValue": false,
+        "name": "Controls whether scheduled updates are enabled.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "wilcoScheduledUpdateTimeOfDay",
+        "description": "Allows an admin to control the time of day that scheduled updates are applied.",
+        "inputConstraint": "The long field should have value greater than or equal to zero.",
+        "knownValueDescriptions": [
+          { "value": "0", "description": "12:00\u202fAM." },
+          { "value": "15", "description": "12:15\u202fAM." },
+          { "value": "30", "description": "12:30\u202fAM." },
+          { "value": "45", "description": "12:45\u202fAM." },
+          { "value": "60", "description": "1:00\u202fAM." },
+          { "value": "75", "description": "1:15\u202fAM." },
+          { "value": "90", "description": "1:30\u202fAM." },
+          { "value": "105", "description": "1:45\u202fAM." },
+          { "value": "120", "description": "2:00\u202fAM." },
+          { "value": "135", "description": "2:15\u202fAM." },
+          { "value": "150", "description": "2:30\u202fAM." },
+          { "value": "165", "description": "2:45\u202fAM." },
+          { "value": "180", "description": "3:00\u202fAM." },
+          { "value": "195", "description": "3:15\u202fAM." },
+          { "value": "210", "description": "3:30\u202fAM." },
+          { "value": "225", "description": "3:45\u202fAM." },
+          { "value": "240", "description": "4:00\u202fAM." },
+          { "value": "255", "description": "4:15\u202fAM." },
+          { "value": "270", "description": "4:30\u202fAM." },
+          { "value": "285", "description": "4:45\u202fAM." },
+          { "value": "300", "description": "5:00\u202fAM." },
+          { "value": "315", "description": "5:15\u202fAM." },
+          { "value": "330", "description": "5:30\u202fAM." },
+          { "value": "345", "description": "5:45\u202fAM." },
+          { "value": "360", "description": "6:00\u202fAM." },
+          { "value": "375", "description": "6:15\u202fAM." },
+          { "value": "390", "description": "6:30\u202fAM." },
+          { "value": "405", "description": "6:45\u202fAM." },
+          { "value": "420", "description": "7:00\u202fAM." },
+          { "value": "435", "description": "7:15\u202fAM." },
+          { "value": "450", "description": "7:30\u202fAM." },
+          { "value": "465", "description": "7:45\u202fAM." },
+          { "value": "480", "description": "8:00\u202fAM." },
+          { "value": "495", "description": "8:15\u202fAM." },
+          { "value": "510", "description": "8:30\u202fAM." },
+          { "value": "525", "description": "8:45\u202fAM." },
+          { "value": "540", "description": "9:00\u202fAM." },
+          { "value": "555", "description": "9:15\u202fAM." },
+          { "value": "570", "description": "9:30\u202fAM." },
+          { "value": "585", "description": "9:45\u202fAM." },
+          { "value": "600", "description": "10:00\u202fAM." },
+          { "value": "615", "description": "10:15\u202fAM." },
+          { "value": "630", "description": "10:30\u202fAM." },
+          { "value": "645", "description": "10:45\u202fAM." },
+          { "value": "660", "description": "11:00\u202fAM." },
+          { "value": "675", "description": "11:15\u202fAM." },
+          { "value": "690", "description": "11:30\u202fAM." },
+          { "value": "705", "description": "11:45\u202fAM." },
+          { "value": "720", "description": "12:00\u202fPM." },
+          { "value": "735", "description": "12:15\u202fPM." },
+          { "value": "750", "description": "12:30\u202fPM." },
+          { "value": "765", "description": "12:45\u202fPM." },
+          { "value": "780", "description": "1:00\u202fPM." },
+          { "value": "795", "description": "1:15\u202fPM." },
+          { "value": "810", "description": "1:30\u202fPM." },
+          { "value": "825", "description": "1:45\u202fPM." },
+          { "value": "840", "description": "2:00\u202fPM." },
+          { "value": "855", "description": "2:15\u202fPM." },
+          { "value": "870", "description": "2:30\u202fPM." },
+          { "value": "885", "description": "2:45\u202fPM." },
+          { "value": "900", "description": "3:00\u202fPM." },
+          { "value": "915", "description": "3:15\u202fPM." },
+          { "value": "930", "description": "3:30\u202fPM." },
+          { "value": "945", "description": "3:45\u202fPM." },
+          { "value": "960", "description": "4:00\u202fPM." },
+          { "value": "975", "description": "4:15\u202fPM." },
+          { "value": "990", "description": "4:30\u202fPM." },
+          { "value": "1005", "description": "4:45\u202fPM." },
+          { "value": "1020", "description": "5:00\u202fPM." },
+          { "value": "1035", "description": "5:15\u202fPM." },
+          { "value": "1050", "description": "5:30\u202fPM." },
+          { "value": "1065", "description": "5:45\u202fPM." },
+          { "value": "1080", "description": "6:00\u202fPM." },
+          { "value": "1095", "description": "6:15\u202fPM." },
+          { "value": "1110", "description": "6:30\u202fPM." },
+          { "value": "1125", "description": "6:45\u202fPM." },
+          { "value": "1140", "description": "7:00\u202fPM." },
+          { "value": "1155", "description": "7:15\u202fPM." },
+          { "value": "1170", "description": "7:30\u202fPM." },
+          { "value": "1185", "description": "7:45\u202fPM." },
+          { "value": "1200", "description": "8:00\u202fPM." },
+          { "value": "1215", "description": "8:15\u202fPM." },
+          { "value": "1230", "description": "8:30\u202fPM." },
+          { "value": "1245", "description": "8:45\u202fPM." },
+          { "value": "1260", "description": "9:00\u202fPM." },
+          { "value": "1275", "description": "9:15\u202fPM." },
+          { "value": "1290", "description": "9:30\u202fPM." },
+          { "value": "1305", "description": "9:45\u202fPM." },
+          { "value": "1320", "description": "10:00\u202fPM." },
+          { "value": "1335", "description": "10:15\u202fPM." },
+          { "value": "1350", "description": "10:30\u202fPM." },
+          { "value": "1365", "description": "10:45\u202fPM." },
+          { "value": "1380", "description": "11:00\u202fPM." },
+          { "value": "1395", "description": "11:15\u202fPM." },
+          { "value": "1410", "description": "11:30\u202fPM." },
+          { "value": "1425", "description": "11:45\u202fPM." }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "wilcoScheduledUpdateEnabled",
+            "sourceFieldValue": "true"
+          }
+        ],
+        "name": "Allows an admin to control the time of day that scheduled updates are applied.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "wilcoScheduledUpdateFrequency",
+        "description": "Controls how often (daily, weekly, monthly) the device should check for ChromeOS updates.",
+        "knownValueDescriptions": [
+          {
+            "value": "WILCO_UPDATE_FREQUENCY_ENUM_DAILY",
+            "description": "Daily updates."
+          },
+          {
+            "value": "WILCO_UPDATE_FREQUENCY_ENUM_WEEKLY",
+            "description": "Weekly updates."
+          },
+          {
+            "value": "WILCO_UPDATE_FREQUENCY_ENUM_MONTHLY",
+            "description": "Monthly updates."
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "wilcoScheduledUpdateEnabled",
+            "sourceFieldValue": "true"
+          }
+        ],
+        "defaultValue": "WILCO_UPDATE_FREQUENCY_ENUM_DAILY",
+        "name": "Controls how often (daily, weekly, monthly) the device should check for ChromeOS updates.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "wilcoScheduledUpdateDayOfWeek",
+        "description": "Specifies the day of the week on which weekly updates should occur.",
+        "knownValueDescriptions": [
+          { "value": "WEEK_DAY_ENUM_MONDAY", "description": "Monday" },
+          { "value": "WEEK_DAY_ENUM_TUESDAY", "description": "Tuesday" },
+          { "value": "WEEK_DAY_ENUM_WEDNESDAY", "description": "Wednesday" },
+          { "value": "WEEK_DAY_ENUM_THURSDAY", "description": "Thursday" },
+          { "value": "WEEK_DAY_ENUM_FRIDAY", "description": "Friday" },
+          { "value": "WEEK_DAY_ENUM_SATURTADY", "description": "Saturday" },
+          { "value": "WEEK_DAY_ENUM_SUNDAY", "description": "sunday" }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "wilcoScheduledUpdateEnabled",
+            "sourceFieldValue": "true"
+          }
+        ],
+        "defaultValue": "WEEK_DAY_ENUM_MONDAY",
+        "name": "Specifies the day of the week on which weekly updates should occur.",
+        "fieldConstraints": {}
+      },
+      {
+        "field": "wilcoScheduledUpdateDayOfMonth",
+        "description": "Specifies a day each month on which the device will check for updates.",
+        "inputConstraint": "The long field should have value greater than or equal to zero.",
+        "knownValueDescriptions": [
+          {
+            "value": "1",
+            "description": "The 1st day of the month."
+          },
+          {
+            "value": "2",
+            "description": "The 2nd day of the month."
+          },
+          {
+            "value": "3",
+            "description": "The 3rd day of the month."
+          },
+          {
+            "value": "4",
+            "description": "The 4th day of the month."
+          },
+          {
+            "value": "5",
+            "description": "The 5th day of the month."
+          },
+          {
+            "value": "6",
+            "description": "The 6th day of the month."
+          },
+          {
+            "value": "7",
+            "description": "The 7th day of the month."
+          },
+          {
+            "value": "8",
+            "description": "The 8th day of the month."
+          },
+          {
+            "value": "9",
+            "description": "The 9th day of the month."
+          },
+          {
+            "value": "10",
+            "description": "The 10th day of the month."
+          },
+          {
+            "value": "11",
+            "description": "The 11th day of the month."
+          },
+          {
+            "value": "12",
+            "description": "The 12th day of the month."
+          },
+          {
+            "value": "13",
+            "description": "The 13th day of the month."
+          },
+          {
+            "value": "14",
+            "description": "The 14th day of the month."
+          },
+          {
+            "value": "15",
+            "description": "The 15th day of the month."
+          },
+          {
+            "value": "16",
+            "description": "The 16th day of the month."
+          },
+          {
+            "value": "17",
+            "description": "The 17th day of the month."
+          },
+          {
+            "value": "18",
+            "description": "The 18th day of the month."
+          },
+          {
+            "value": "19",
+            "description": "The 19th day of the month."
+          },
+          {
+            "value": "20",
+            "description": "The 20th day of the month."
+          },
+          {
+            "value": "21",
+            "description": "The 21st day of the month."
+          },
+          {
+            "value": "22",
+            "description": "The 22nd day of the month."
+          },
+          {
+            "value": "23",
+            "description": "The 23rd day of the month."
+          },
+          {
+            "value": "24",
+            "description": "The 24th day of the month."
+          },
+          {
+            "value": "25",
+            "description": "The 25th day of the month."
+          },
+          {
+            "value": "26",
+            "description": "The 26th day of the month."
+          },
+          {
+            "value": "27",
+            "description": "The 27th day of the month."
+          },
+          {
+            "value": "28",
+            "description": "The 28th day of the month."
+          },
+          {
+            "value": "29",
+            "description": "The 29th day of the month."
+          },
+          {
+            "value": "30",
+            "description": "The 30th day of the month."
+          },
+          {
+            "value": "31",
+            "description": "The 31st day of the month."
+          }
+        ],
+        "fieldDependencies": [
+          {
+            "sourceField": "wilcoScheduledUpdateEnabled",
+            "sourceFieldValue": "true"
+          }
+        ],
+        "name": "Specifies a day each month on which the device will check for updates.",
+        "fieldConstraints": {}
+      }
+    ],
+    "accessRestrictions": [
+      "This policy only affects device types: Dell Latitude 5400 Chromebook Enterprise, Dell Latitude 5300 2-in-1 Chromebook Enterprise, Dell Latitude 7410 Chromebook Enterprise, Dell Latitude 7410 2-in-1 Chromebook Enterprise."
+    ],
+    "schemaName": "chrome.devices.WilcoScheduledUpdate",
+    "validTargetResources": ["ORG_UNIT"],
+    "policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
+    "categoryTitle": "Device update settings",
+    "supportedPlatforms": ["CHROME_OS"]
+  },
+  {
+    "name": "customers/C022n8w1u/policySchemas/chrome.devices.Variations",
+    "policyDescription": "Variations.",
+    "definition": {
+      "messageType": [
+        {
+          "name": "Variations",
+          "field": [
+            {
+              "name": "deviceVariationsEnabled",
+              "number": 1,
+              "label": "LABEL_OPTIONAL",
+              "type": "TYPE_ENUM",
+              "typeName": "DeviceVariationsLevelEnum"
+            }
+          ]
+        }
+      ],
+      "enumType": [
+        {
+          "name": "DeviceVariationsLevelEnum",
+          "value": [
+            {
+              "name": "DEVICE_VARIATIONS_LEVEL_ENUM_ENABLED",
+              "number": 1
+            },
+            {
+              "name": "DEVICE_VARIATIONS_LEVEL_ENUM_CRITICAL_FIXES_ONLY",
+              "number": 2
+            },
+            {
+              "name": "DEVICE_VARIATIONS_LEVEL_ENUM_DISABLED",
+              "number": 3
+            }
+          ]
+        }
+      ]
+    },
+    "fieldDescriptions": [
+      {
+        "field": "deviceVariationsEnabled",
+        "description": "Chrome Variations. Controls which Chrome Variations are enabled, disabled, or enabled for critical fixes only on devices.",
+        "knownValueDescriptions": [
+          {
+            "value": "DEVICE_VARIATIONS_LEVEL_ENUM_ENABLED",
+            "description": "Enable Chrome variations."
+          },
+          {
+            "value": "DEVICE_VARIATIONS_LEVEL_ENUM_CRITICAL_FIXES_ONLY",
+            "description": "Enable variations for critical fixes only."
+          },
+          {
+            "value": "DEVICE_VARIATIONS_LEVEL_ENUM_DISABLED",
+            "description": "Disable variations."
+          }
+        ],
+        "defaultValue": "DEVICE_VARIATIONS_LEVEL_ENUM_ENABLED",
+        "name": "Chrome Variations.",
+        "fieldDescription": "Controls which Chrome Variations are enabled, disabled, or enabled for critical fixes only on devices.",
+        "fieldConstraints": {}
+      }
+    ],
+    "notices": [
+      {
+        "field": "deviceVariationsEnabled",
+        "noticeValue": "DEVICE_VARIATIONS_LEVEL_ENUM_DISABLED",
+        "noticeMessage": "Disabling variations significantly increases the risk of future security and compatibility issues and is not recommended."
+      }
+    ],
+    "schemaName": "chrome.devices.Variations",
+    "validTargetResources": ["ORG_UNIT"],
+    "policyApiLifecycle": { "policyApiLifecycleStage": "API_CURRENT" },
+    "categoryTitle": "Device update settings",
+    "supportedPlatforms": ["CHROME_OS"]
+  }
 ]

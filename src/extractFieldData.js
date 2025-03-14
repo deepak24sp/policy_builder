@@ -104,6 +104,7 @@ function extractNestedFields(
       field: nestedField.field,
       description: nestedField.description || "No description available",
       type: getType(nestedField.field, allFields, isEnum),
+      label: getLabel(nestedField.field, allFields),
       defaultValue: nestedField.defaultValue,
       knownValueDescriptions: isEnum ? nestedField.knownValueDescriptions : [],
       fieldDependencies: nestedField.fieldDependencies || [],

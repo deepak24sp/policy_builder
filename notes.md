@@ -1,3 +1,3 @@
-JSON formate for getting data from frontend
-1. get the data from front-end a
-2. make the formate that api body needed
+savedValues - key and value of the policy that is filled and got on clicking save button
+stortedData - is data extracted from policies.json to to easily to give to poliyform method to build dynamic frontend
+
