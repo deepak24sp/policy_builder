@@ -612,6 +612,74 @@
               {
                 "field": "end",
                 "description": "End.",
+				"nestedFieldDescriptions": [
+                  {
+                    "field": "dayOfWeek",
+                    "description": "Day of week.",
+                    "knownValueDescriptions": [
+                      {
+                        "value": "MONDAY",
+                        "description": "Monday."
+                      },
+                      {
+                        "value": "TUESDAY",
+                        "description": "Tuesday."
+                      },
+                      {
+                        "value": "WEDNESDAY",
+                        "description": "Wednesday."
+                      },
+                      {
+                        "value": "THURSDAY",
+                        "description": "Thursday."
+                      },
+                      {
+                        "value": "FRIDAY",
+                        "description": "Friday."
+                      },
+                      {
+                        "value": "SATURDAY",
+                        "description": "Saturday."
+                      },
+                      {
+                        "value": "SUNDAY",
+                        "description": "Sunday."
+                      }
+                    ],
+                    "name": "Day of week.",
+                    "fieldConstraints": {}
+                  },
+                  {
+                    "field": "hours",
+                    "description": "Hours.",
+                    "name": "Hours.",
+                    "fieldConstraints": {}
+                  },
+                  {
+                    "field": "minutes",
+                    "description": "Minutes.",
+                    "knownValueDescriptions": [
+                      {
+                        "value": "0",
+                        "description": "0."
+                      },
+                      {
+                        "value": "15",
+                        "description": "15."
+                      },
+                      {
+                        "value": "30",
+                        "description": "30."
+                      },
+                      {
+                        "value": "45",
+                        "description": "45."
+                      }
+                    ],
+                    "name": "Minutes.",
+                    "fieldConstraints": {}
+                  }
+                ],
                 "name": "End.",
                 "fieldConstraints": {}
               }
@@ -691,16 +759,7 @@
       {
         "field": "deviceMinimumVersionAueMessage",
         "description": "Final automatic update alert message. When a device reaches its last automatic update(https://support.google.com/chrome/a/answer/6220366)automatic , an alert is sent to the user. This text overrides the default message that will be shown on the device.",
-        "fieldDependencies": [
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "true"
-          },
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "false"
-          }
-        ],
+        "fieldDependencies": [],
         "name": "Final automatic update alert message.",
         "fieldDescription": "When a device reaches its last automatic update(https://support.google.com/chrome/a/answer/6220366)automatic , an alert is sent to the user. This text overrides the default message that will be shown on the device.",
         "fieldConstraints": {}
@@ -801,16 +860,7 @@
             "fieldConstraints": {}
           }
         ],
-        "fieldDependencies": [
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "true"
-          },
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "false"
-          }
-        ],
+        "fieldDependencies": [],
         "name": "Sets the minimum version of ChromeOS a device must be updated to.",
         "fieldConstraints": {}
       },
@@ -827,16 +877,7 @@
             "description": "Use HTTPS for update downloads."
           }
         ],
-        "fieldDependencies": [
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "true"
-          },
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "false"
-          }
-        ],
+        "fieldDependencies": [],
         "defaultValue": false,
         "name": "Update downloads.",
         "fieldDescription": "Controls whether update downloads use HTTP or HTTPS.",
@@ -871,16 +912,7 @@
             "description": "Dev channel (may be unstable)."
           }
         ],
-        "fieldDependencies": [
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "true"
-          },
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "false"
-          }
-        ],
+        "fieldDependencies": [],
         "defaultValue": "RELEASE_CHANNEL_WITH_LTS_ENUM_STABLE_CHANNEL",
         "name": "Release channel.",
         "fieldDescription": "Changing the release channel can have drastic effects on the current organization and its children. Ensure any changes to this setting are intended. Learn more about release channels: https://support.google.com/chrome/a/answer/1375678#release_channel?hl={$languageCode}.",
@@ -899,16 +931,7 @@
             "description": "Do not allow peer to peer auto update downloads."
           }
         ],
-        "fieldDependencies": [
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "true"
-          },
-          {
-            "sourceField": "updateDisabled",
-            "sourceFieldValue": "false"
-          }
-        ],
+        "fieldDependencies": [],
         "defaultValue": true,
         "name": "Peer to peer.",
         "fieldDescription": "Controls whether peer to peer auto update downloads are allowed.",

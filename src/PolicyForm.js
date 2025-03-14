@@ -33,10 +33,10 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
     setFieldValues(initialValues);
   }, [storedData]);
 
-  const handleFieldChange = useCallback((fieldName, value) => {
+  const handleFieldChange = useCallback((fieldPath, value) => {
     setFieldValues((prevValues) => ({
       ...prevValues,
-      [fieldName]: value,
+      [fieldPath]: value, // Use the full field path as the key
     }));
   }, []);
 
@@ -54,24 +54,26 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
   );
 
   // Recursive function to handle nested fields
-  const processField = (field, currentFieldValues) => {
+  const processField = (field, currentFieldValues, parentFieldPath = "") => {
     const { field: fieldName, nestedFields } = field;
+    const fullFieldPath = parentFieldPath
+      ? `${parentFieldPath}.${fieldName}`
+      : fieldName;
 
     if (nestedFields && nestedFields.length > 0) {
-      // If the field has nested fields, recursively process them
       const nestedResult = {};
       nestedFields.forEach((nestedField) => {
         const nestedFieldName = nestedField.field;
         nestedResult[nestedFieldName] = processField(
           nestedField,
-          currentFieldValues
+          currentFieldValues,
+          fullFieldPath
         );
       });
       return nestedResult;
     }
 
-    // If it's a regular field, return its value
-    return currentFieldValues[fieldName] ?? field.defaultValue;
+    return currentFieldValues[fullFieldPath] ?? field.defaultValue;
   };
 
   const handleSave = () => {
@@ -84,11 +86,9 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
         policyResult[fieldName] = processField(field, fieldValues);
       });
 
-      // Group by policyDescription
       result[policy.policyDescription] = policyResult;
     });
 
-    // Call the onSave prop with the grouped result
     onSave(result);
   };
 
@@ -98,16 +98,21 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
   };
 
   const FieldRenderer = React.memo(
-    ({ field, fieldValues: values, onFieldChange }) => {
+    ({ field, fieldValues: values, onFieldChange, parentFieldPath = "" }) => {
       const {
         type,
         label,
         knownValueDescriptions = [],
         defaultValue,
-        field: fieldLabel,
+        field: fieldName,
         fieldDependencies = [],
         nestedFields = [],
       } = field;
+
+      // Construct the full field path
+      const fullFieldPath = parentFieldPath
+        ? `${parentFieldPath}.${fieldName}`
+        : fieldName;
 
       // Calculate isActive unconditionally
       const isActive = useMemo(
@@ -123,7 +128,7 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
         return (
           <Box sx={{ mb: 3 }}>
             <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 1 }}>
-              {fieldLabel}
+              {fieldName}
             </Typography>
             {nestedFields.map((nestedField, index) => (
               <Box key={index} sx={{ ml: 3, mt: 1.5 }}>
@@ -131,6 +136,7 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                   field={nestedField}
                   fieldValues={values}
                   onFieldChange={onFieldChange}
+                  parentFieldPath={fullFieldPath} // Pass the full field path
                 />
               </Box>
             ))}
@@ -143,11 +149,12 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
           if (label === "LABEL_REPEATED") {
             return (
               <RepeatedField
-                fieldLabel={fieldLabel}
+                fieldName={fieldName}
                 knownValueDescriptions={knownValueDescriptions}
                 fieldValues={values}
                 onFieldChange={onFieldChange}
                 defaultValue={defaultValue}
+                parentFieldPath={fullFieldPath} // Pass the full field path
               />
             );
           }
@@ -184,28 +191,19 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                   color: "rgba(0, 0, 0, 0.6)",
                 }}
               >
-                {fieldLabel}
+                {fieldName}
               </Typography>
-              <InputLabel
-                id={`${fieldLabel}-label`}
-                sx={{
-                  display: "none",
-                }}
-              >
-                {fieldLabel}
+              <InputLabel id={`${fieldName}-label`} sx={{ display: "none" }}>
+                {fieldName}
               </InputLabel>
               <Select
-                labelId={`${fieldLabel}-label`}
-                value={values[fieldLabel] ?? defaultValue}
-                onChange={(e) => onFieldChange(fieldLabel, e.target.value)}
+                labelId={`${fieldName}-label`}
+                value={values[fullFieldPath] ?? defaultValue}
+                onChange={(e) => onFieldChange(fullFieldPath, e.target.value)}
                 label=""
                 sx={{
                   height: "48px",
-                  ".MuiSelect-select": {
-                    pt: 1.5,
-                    pb: 1.5,
-                    pl: 2,
-                  },
+                  ".MuiSelect-select": { pt: 1.5, pb: 1.5, pl: 2 },
                 }}
               >
                 {knownValueDescriptions.map((item, index) => (
@@ -239,17 +237,17 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                     },
                   }}
                 >
-                  {fieldLabel}
+                  {fieldName}
                 </FormLabel>
                 <FormControlLabel
                   control={
                     <Switch
                       checked={
-                        values[fieldLabel] === "true" ||
-                        values[fieldLabel] === true
+                        values[fieldName] === "true" ||
+                        values[fieldName] === true
                       }
                       onChange={(e) =>
-                        onFieldChange(fieldLabel, e.target.checked.toString())
+                        onFieldChange(fieldName, e.target.checked.toString())
                       }
                       color="success"
                       sx={{
@@ -302,12 +300,12 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                   },
                 }}
               >
-                {fieldLabel}
+                {fieldName}
               </FormLabel>
               <RadioGroup
                 row
-                value={values[fieldLabel] ?? defaultValue?.toString()}
-                onChange={(e) => onFieldChange(fieldLabel, e.target.value)}
+                value={values[fieldName] ?? defaultValue?.toString()}
+                onChange={(e) => onFieldChange(fieldName, e.target.value)}
                 sx={{
                   ".MuiFormControlLabel-root": {
                     marginRight: 4,
@@ -347,8 +345,8 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
               label=""
               type="number"
               fullWidth
-              value={values[fieldLabel] ?? defaultValue}
-              onChange={(e) => onFieldChange(fieldLabel, e.target.value)}
+              value={values[fullFieldPath] ?? defaultValue} // Use fullFieldPath
+              onChange={(e) => onFieldChange(fullFieldPath, e.target.value)} // Use fullFieldPath
               variant="outlined"
               sx={{
                 mb: 2.5,
@@ -377,7 +375,7 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                       color: "rgba(0, 0, 0, 0.6)",
                     }}
                   >
-                    {fieldLabel}
+                    {fieldName}
                   </Typography>
                 ),
               }}
@@ -390,8 +388,8 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
               label=""
               type="text"
               fullWidth
-              value={values[fieldLabel] ?? defaultValue}
-              onChange={(e) => onFieldChange(fieldLabel, e.target.value)}
+              value={values[fieldName] ?? defaultValue}
+              onChange={(e) => onFieldChange(fieldName, e.target.value)}
               variant="outlined"
               sx={{
                 mb: 2.5,
@@ -420,7 +418,7 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                       color: "rgba(0, 0, 0, 0.6)",
                     }}
                   >
-                    {fieldLabel}
+                    {fieldName}
                   </Typography>
                 ),
               }}
@@ -436,8 +434,8 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                 fullWidth
                 multiline
                 minRows={3}
-                value={values[fieldLabel] ?? defaultValue}
-                onChange={(e) => onFieldChange(fieldLabel, e.target.value)}
+                value={values[fieldName] ?? defaultValue}
+                onChange={(e) => onFieldChange(fieldName, e.target.value)}
                 variant="outlined"
                 sx={{
                   mb: 2.5,
@@ -465,7 +463,7 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
                         color: "rgba(0, 0, 0, 0.6)",
                       }}
                     >
-                      {fieldLabel}
+                      {fieldName}
                     </Typography>
                   ),
                 }}
@@ -476,7 +474,7 @@ const PolicyForm = ({ storedData, onSave, onCancel }) => {
           return (
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 1 }}>
-                {fieldLabel}
+                {fieldName}
               </Typography>
               {nestedFields.map((nestedField, index) => (
                 <Box key={index} sx={{ ml: 3, mt: 1.5 }}>

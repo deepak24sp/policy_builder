@@ -11,22 +11,28 @@ export function policyBodyBuilder(storedData, savedValues) {
   for (const [policyDescriptionName, policyValue] of Object.entries(
     savedValues
   )) {
-    // console.log(policyDescriptionName);
     let policyfieldDescription = null;
 
+    // Find the matching policy description in storedData
     for (const policy of storedData) {
-      // console.log("-------------");
       if (policy.policyDescription === policyDescriptionName) {
         policyfieldDescription = policy.fieldDescriptions;
-        // console.log(policyDescriptionName);
-        const single = createPolicyBody(policyValue, policyfieldDescription);
-        console.log(single);
+        break;
       }
-      break;
     }
 
-    // console.log(policyValue);
-    // console.log(policyfieldDescription);
+    // If no matching policy description is found, skip this iteration
+    if (!policyfieldDescription) {
+      continue;
+    }
+    console.log(policyfieldDescription);
+    console.log(policyValue);
+
+    // Create the policy body and map values to field descriptions
+    const policyBody = createPolicyBody(policyValue, policyfieldDescription);
+
+    // Add the policy body to the result with the key as the policy description
+    result[policyDescriptionName] = policyBody;
   }
 
   return result;
@@ -61,9 +67,11 @@ function createPolicyBody(policyValue, policyfieldDescription) {
 
     // Check field dependencies
     const dependenciesSatisfied = fieldDependencies.every((dep) => {
-      return currentPolicyValue[dep.sourceField] === dep.sourceFieldValue;
+      const sourceFieldValue = currentPolicyValue[dep.sourceField];
+      return String(sourceFieldValue) === String(dep.sourceFieldValue);
     });
 
+    // Skip if dependencies are not satisfied
     if (!dependenciesSatisfied) return;
 
     // Get the value from policyValue

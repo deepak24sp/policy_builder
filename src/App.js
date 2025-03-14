@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import sample from "./data/device_update.json";
+import sample from "./data/enroll.json";
 import { extractFieldData } from "./extractFieldData";
 import PolicyForm from "./PolicyForm";
 import Box from "@mui/material/Box";
@@ -33,9 +33,9 @@ function App() {
       <Box component="section" sx={{ p: 2, width: 700 }}>
         <PolicyForm storedData={storedData} onSave={handleSave} />
       </Box>
-      {/* <pre>{JSON.stringify(storedData, null, 2)}</pre> */}
-      {savedValues && <pre>{JSON.stringify(savedValues, null, 2)}</pre>}
-
+      <pre>{JSON.stringify(storedData, null, 2)}</pre>
+      {/* {savedValues && <pre>{JSON.stringify(savedValues, null, 2)}</pre>} */}
+      <pre>--------------------------------</pre>
       <pre>{JSON.stringify(poilcyBody, null, 2)}</pre>
     </div>
   );
