@@ -25,11 +25,7 @@ function getLabel(fieldName, allFields) {
 
 function checkFieldDependencies(field) {
   // If no dependencies, field is always active
-  if (
-    !field.fieldDependencies ||
-    field.fieldDependencies.length === 0 ||
-    field.fieldDependencies.length === 2
-  ) {
+  if (!field.fieldDependencies || field.fieldDependencies.length === 0) {
     return true;
   }
 

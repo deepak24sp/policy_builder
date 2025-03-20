@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import sample from "./data/device_update.json";
+import sample from "./data/enroll.json";
 import { extractFieldData } from "./extractFieldData";
 import PolicyForm from "./PolicyForm";
 import Box from "@mui/material/Box";

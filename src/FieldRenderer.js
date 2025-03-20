@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import RepeatedField from "./RepeatedField";
 import RepeatedNestedField from "./RepeatedNestedField";
+import RepeatedStringInput from "./RepeatedStringInput";
 import { evaluateDependencies } from "./utils";
 const FieldRenderer = ({ field, fieldValues: values, onFieldChange }) => {
   const {
@@ -215,6 +216,17 @@ const FieldRenderer = ({ field, fieldValues: values, onFieldChange }) => {
       );
 
     case "TYPE_STRING":
+      if (label === "LABEL_REPEATED") {
+        return (
+          <RepeatedStringInput
+            fieldLabel={fieldLabel}
+            values={values}
+            onFieldChange={onFieldChange}
+          />
+        );
+      }
+
+      // Normal text input for non-repeated strings
       return (
         <TextField
           label=""
