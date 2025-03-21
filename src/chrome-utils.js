@@ -10,7 +10,7 @@ export const evaluateDependencies = (fieldDependencies, currentFieldValues) => {
 };
 
 export const processField = (field, currentFieldValues) => {
-  console.log(field, currentFieldValues);
+  // console.log(field, currentFieldValues);
   const { field: fieldName, nestedFields, label } = field;
 
   // Handle repeated nested fields (e.g., "timeRestriction")

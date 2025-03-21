@@ -17,7 +17,7 @@ import {
 import RepeatedField from "./RepeatedField";
 import RepeatedNestedField from "./RepeatedNestedField";
 import RepeatedStringInput from "./RepeatedStringInput";
-import { evaluateDependencies } from "./utils";
+import { evaluateDependencies } from "./chrome-utils";
 const FieldRenderer = ({ field, fieldValues: values, onFieldChange }) => {
   const {
     type,

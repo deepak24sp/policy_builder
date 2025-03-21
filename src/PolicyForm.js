@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Button } from "@mui/material";
 import PolicySection from "./PolicySection ";
-import { processField } from "./utils";
+import { processField } from "./chrome-utils";
 const PolicyForm = ({ storedData, onSave, onCancel }) => {
   const [fieldValues, setFieldValues] = useState({});
 
